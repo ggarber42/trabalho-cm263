@@ -26,7 +26,7 @@ library(lubridate)
 library(summarytools)
 ```
 
-[Drive_banco](https://drive.google.com/drive/folders/1g0k5r6J7X8Z2v3Q9x4y5z6A7B8C9D0E1?usp=sharing)
+[Drive_banco](https://drive.google.com/drive/folders/1qKnh2IpN5_D_PhOnMdAViHa8L-FK5LFA?usp=sharing)
 
 # Banco de dados
 
@@ -47,10 +47,3 @@ dados |>
   glimpse()
 
 ```
-
-
-```{python}
-import pandas as pd
-
-```
-
