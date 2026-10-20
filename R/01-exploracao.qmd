@@ -26,6 +26,8 @@ library(lubridate)
 library(summarytools)
 ```
 
+[Drive_banco](https://drive.google.com/drive/folders/1g0k5r6J7X8Z2v3Q9x4y5z6A7B8C9D0E1?usp=sharing)
+
 # Banco de dados
 
 ```{r}
@@ -43,4 +45,12 @@ dados <- arrow::open_dataset(
 # Visão geral
 dados |>
   glimpse()
+
 ```
+
+
+```{python}
+import pandas as pd
+
+```
+
