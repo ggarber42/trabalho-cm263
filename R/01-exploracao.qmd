@@ -1,0 +1,46 @@
+---
+title: "Exploração — GERCON POA"
+author: "André, Guilherme, Felipe"
+date: today
+format:
+  html:
+    toc: true
+    code-fold: true
+    theme: flatly
+execute:
+  warning: false
+  message: false
+  cache: true
+lang: pt
+---
+
+# Bibliotecas
+
+```{r}
+library(dplyr) 
+library(ggplot2) 
+library(arrow) 
+library(gtsummary) 
+library(janitor) 
+library(lubridate) 
+library(summarytools)
+```
+
+# Banco de dados
+
+```{r}
+# Banco
+dados <- arrow::open_dataset(
+  here::here("dados", "processados", "gercon_poa_censo.parquet")
+) |>
+  collect() |>
+  janitor::clean_names()
+
+```
+
+
+```{r}
+# Visão geral
+dados |>
+  glimpse()
+```
