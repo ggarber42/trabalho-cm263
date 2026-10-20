@@ -40,10 +40,108 @@ dados <- arrow::open_dataset(
 
 ```
 
-
 ```{r}
 # Visão geral
 dados |>
   glimpse()
 
 ```
+
+## Selecão de variáveis
+```{r}
+# filtrar as variáveis de interesse
+dados<-dados |> 
+  dplyr::select(idsolicitacao,situacaosolicitacao,data_solicitacao,corregulador,
+  diasfilaespera,complexidade,especialidademae,cid,idpaciente,idade,cnes_solicitante,situacaoagenda,
+  datahora_consulta,cnesexecutante, possuiunidadeindicada, favela_comunidade,taxa_alf_geral,
+  coordenadoria_saude,distrito_sanitario, renda_media_winsor) |> 
+    filter(complexidade=="MEDIA") |>
+    rename(censo_favela_comunidade = favela_comunidade,
+           censo_taxa_alfabetizacao = taxa_alf_geral,
+           censo_coordenadoria_saude = coordenadoria_saude,
+           censo_distrito_sanitario = distrito_sanitario,
+           censo_renda_media_winsor = renda_media_winsor)
+```
+
+
+```{r}
+# Transformações de variáveis
+datas<- c("data_solicitacao","datahora_consulta")
+
+categoricas<- c("situacaosolicitacao","corregulador","complexidade","especialidademae",
+              "cid","cnes_solicitante","situacaoagenda","cnesexecutante",
+              "possuiunidadeindicada","censo_coordenadoria_saude","censo_distrito_sanitario")
+
+numericas<- c("diasfilaespera","idade","censo_taxa_alfabetizacao","censo_renda_media_winsor","censo_favela_comunidade")
+
+dados<-dados |> 
+  mutate(across(all_of(datas), ymd_hms)) |>
+  mutate(across(all_of(categoricas), as.factor)) |>
+  mutate(across(all_of(numericas), as.numeric))
+
+```
+
+
+```{r}
+# Filtrar a variavel complexidade para "MEDIA"
+dados<-dados |>
+  filter(complexidade=="MEDIA") |> 
+  dplyr::select(-complexidade)
+```
+
+Deixe o banco de dados com o seguinte referencial APS ----> Serviço Especializado (Média complexidade)
+
+## Análise das variáveis relacionadas ao desfecho
+
+#### datahora_consulta
+
+```{r}
+# Análise das variáveis relacionadas ao desfecho 
+dados |>
+  dplyr::select(datahora_consulta) |>
+  summarytools::dfSummary()
+```
+
+40.8% - Missing - ou seja, não temos como prever se a consulta foi realizada ou não.
+
+```{r}
+#filtar encaminhamentos que não tem datahora_consulta
+dados<-dados |>
+  filter(!is.na(datahora_consulta))
+```
+
+#### relacao situacao_solicitacao e situacao_agenda
+
+```{r}
+# tabela cruzada entre situacao_solicitacao e situacao_agenda
+dados |> 
+  tabyl(situacaosolicitacao, situacaoagenda) |>
+  adorn_totals(c("row", "col")) |>
+  adorn_percentages("row") |>
+  adorn_pct_formatting(digits = 1)
+```
+
+Para nós vai valer a pena FALTANTE e REALIZADA. Depois poderiamos pegar os casos que tem AGENDA_CONFIRMADA e AGENDADA para ver na atualização do GERCON o que aconteceu com elas. 
+
+
+```{r}
+# filtrar para faltante e realizada
+dados<-dados |>
+  dplyr::filter(situacaoagenda %in% c("FALTANTE","REALIZADA"))
+```
+
+```{r}
+dados |> 
+  tabyl(situacaosolicitacao, situacaoagenda) |>
+  adorn_totals(c("row", "col")) |>
+  adorn_percentages("row") |>
+  adorn_pct_formatting(digits = 1)
+
+```
+
+
+```{r}
+# salvar o resultado num arquivo parquet
+arrow::write_parquet(dados, here::here("dados", "processados", "gercon_poa_censo_filtrado.parquet"))
+```
+
