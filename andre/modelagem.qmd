@@ -1,0 +1,175 @@
+# Modelagem dos dados
+## libs
+```{python}
+## Carregando as bibliotecas básicas necessárias
+# A primeira linha é incluída para gerar os gráficos logo abaixo dos comandos de plot
+%matplotlib inline
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+from sklearn.model_selection import train_test_split, cross_val_score, StratifiedKFold
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, RobustScaler, OneHotEncoder
+from sklearn.impute import SimpleImputer, KNNImputer
+from sklearn.pipeline import Pipeline
+from sklearn.compose import ColumnTransformer
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import classification_report, ConfusionMatrixDisplay
+
+from imblearn.over_sampling import SMOTE
+from imblearn.under_sampling import RandomUnderSampler
+from imblearn.combine import SMOTETomek
+from imblearn.pipeline import Pipeline as ImbPipeline
+
+import warnings
+warnings.filterwarnings("ignore")
+sns.set(style="whitegrid")
+
+# Seed global para reprodutibilidade
+SEED = 42
+np.random.seed(SEED)
+```
+
+# Dados
+Carregar os dados filtrados do censo do gercon de Porto Alegre. E com as infromações de distancia 
+
+```{python}
+dados = pd.read_parquet("dados/processados/gercon_poa_pronto.parquet", engine='pyarrow')
+```
+
+
+# Descritiva dos dados
+
+```{python}
+dados.info()
+dados.describe()
+dados.dtypes.to_frame("dtype").assign(nulos=dados.isna().sum(), distintos=dados.nunique()).reset_index(names="coluna")
+```
+
+```{python}
+s = dados["situacaoagenda"]
+tab = s.value_counts(dropna=False).to_frame("absoluta")
+tab["relativa_pct"] = (s.value_counts(dropna=False, normalize=True) * 100).round(2)
+tab.index.name = "situacaoagenda"
+tab
+```
+
+Dados desbalanciados. Vamos precisar de tecnicas de oversampling ou undersampling e SMOTE para balancear o dataset.
+
+# Preparar
+```{python}
+# Remover colunas irrelevantes
+dados.drop(['idpaciente'], axis=1, inplace=True)
+
+# Variaveis categoricas e numericas
+# categoricas - corregulador,especialidademae,cid,cnes_solicitante,cnesexecutante,possuiunidadeindicada censo_coordenadoria_saude, censo_distrito_sanitario
+
+cols_categoricas = ["corregulador", "especialidademae", "cid", "cnes_solicitante", "cnesexecutante", "possuiunidadeindicada", "censo_coordenadoria_saude", "censo_distrito_sanitario"]
+dados[[c for c in cols_categoricas if c in dados.columns]].dtypes.to_frame("dtype").assign(n_unique=lambda d: [dados[c].nunique() for c in d.index])
+
+# variaveis numericas - diasfilaespera, idade, censo_favela_comunidade, censo_taxa_alfabetizacao, censo_renda_media_winsor, distancia_km, tempo_caminhando, distancia_km_trans_publico, tempo_desloc_trans_publico, quant_bus, baldiacoes
+
+cols_numericas = ["diasfilaespera", "idade", "censo_favela_comunidade", "censo_taxa_alfabetizacao", "censo_renda_media_winsor", "distancia_km", "tempo_caminhando", "distancia_km_trans_publico", "tempo_desloc_trans_publico", "quant_bus", "baldiacoes"]
+dados[[c for c in cols_numericas if c in dados.columns]].dtypes.to_frame("dtype").assign(n_unique=lambda d: [dados[c].nunique() for c in d.index])
+
+# Transformar target em binário
+dados['situacaoagenda'] = dados['situacaoagenda'].map({'REALIZADA': 1, 'FALTANTE': 0})
+
+print(f"Shape do dataset: {dados.shape}")
+print(f"Colunas numéricas: {list(cols_numericas)}")
+print(f"Colunas categóricas: {list(cols_categoricas)}")
+```
+
+# Parte 1: Transformação de Dados
+## 1.1 Divisão treino/teste
+
+Realizar a divisão em treino e teste, mantendo a proporção da variável situacaoagenda. A divisão será de 70% para treino e 30% para teste, pela variavel situacaoagenda. 
+
+```{python}
+from sklearn.model_selection import train_test_split
+
+X = dados.drop("situacaoagenda", axis=1)
+y = dados["situacaoagenda"]
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+print(f"Treino: {X_train.shape[0]} amostras | Teste: {X_test.shape[0]} amostras")
+print(f"Distribuição no treino:\n{y_train.value_counts(normalize=True).round(3)}")
+
+```
+
+## 1.2 Análise exploratória das features numéricas
+Antes de transformar, inspecionamos as distribuições das variáveis numéricas para entender a necessidade de normalização e identificar possíveis outliers.
+
+Colocar numericas em mesma escala, para isso podemos usar MinMaxScaler.
+
+Verificar a cada variavel tem impacto na media e sd.
+
+
+```{python}
+## Estatísticas descritivas das variáveis numéricas
+X_train[cols_numericas].describe().round(2)
+```
+
+```{python}
+## Distribuições das variáveis numéricas no conjunto de treino
+fig, axes = plt.subplots(1, len(cols_numericas), figsize=(5 * len(cols_numericas), 4))
+for i, col in enumerate(cols_numericas):
+    axes[i].hist(X_train[col].dropna(), bins=30, color='steelblue', edgecolor='white')
+    axes[i].set_title(f'Distribuição de {col}')
+    axes[i].set_xlabel(col)
+    axes[i].set_ylabel('Frequência')
+plt.tight_layout()
+plt.show()
+```
+
+### Plots
+Realizar um boxplot para cada variável numérica para identificar possíveis outliers.
+```{python}
+for col in cols_numericas:
+    plt.figure(figsize=(6, 4))
+    sns.boxplot(x=X_train[col])
+    plt.title(f'Boxplot de {col}')
+    plt.xlabel(col)
+    plt.show()
+
+```
+
+### Distribuição de diasfilaespera
+Ao remover distancia_km > 50 e fazer uma descritiva de X_train . muda?
+```{python}
+X_train[X_train['diasfilaespera'] <= 1000].describe().round(2)
+
+```
+
+### Distribuição de distancia_km
+Ao remover distancia_km > 50 e fazer uma descritiva de X_train . muda?
+```{python}
+X_train[X_train['distancia_km'] <= 50].describe().round(2)
+
+```
+
+## Parte 2: Dados categoricos
+
+### 2.1 Análise exploratória das features categóricas
+O que fazer com as dimensionaidades ?? 
+
+Verificar se uma estategia de pipeline de pre-processamento com uma regressão multinivel. 
+
+## Parte 3: Imputação de Valores Ausentes
+2.1 Diagnóstico de valores ausentes
+Identificamos a quantidade e proporção de valores ausentes em cada coluna.
+
+
+## Parte 4: Desbalanceamento de Classes
+4.1 Estratégias de re-amostragem
+O dataset de Churn apresenta classes desbalanceadas (~73% No Churn vs ~27% Churn). Vamos comparar quatro configurações:
+
+Sem re-amostragem — apenas pré-processamento (baseline)
+SMOTE — oversampling sintético da classe minoritária
+RandomUnderSampler — undersampling aleatório da classe majoritária
+SMOTETomek — combinação: oversampling com limpeza de fronteira
+Todos os experimentos usam o melhor pré-processamento identificado na seção anterior (KNNImputer + Winsorização + MinMaxScaler).
+
