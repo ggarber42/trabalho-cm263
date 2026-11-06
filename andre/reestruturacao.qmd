@@ -1,0 +1,382 @@
+# carregar o banco antigo
+
+## Bibliotecas R
+
+```{r}
+library(here)
+library(arrow)
+library(dplyr)
+library(stringr)
+library(readr)
+library(janitor)
+library(gt)
+library(lubridate)
+```
+
+```{r}
+# Atualizar arquivo gercon_poa_censo_filtrado_final.parquet
+gercon<- read_parquet(here("dados/processados/gercon_poa_censo.parquet")) |> 
+    clean_names()
+
+glimpse(gercon)
+
+```
+
+Banco completo com variaveis de POA e censo, faltando variveis de distancia entre as unidades de solicitacao e execucao
+
+## pre processamento
+
+### Variavel tipounidade
+```{r}
+gercon |> 
+    tabyl(tipounidade) |> 
+    janitor::adorn_pct_formatting() |> 
+    arrange(desc(n))
+```
+
+Filtrar pela categoria CENTRO DE SAUDE/UNIDADE BASICA
+```{r}
+gercon<-gercon |> 
+    filter(tipounidade=="CENTRO DE SAUDE/UNIDADE BASICA")
+
+```
+
+Agora só tem unidades que são da categoria CENTRO DE SAUDE/UNIDADE BASICA. No entanto, tem unidades que não são de APS, e não tem população total do setor no Censo de 2023, pq são unidades antigas ou são unidades de APS que nao existem mais. Vamos entender melhor para realizar o filtro. 
+
+```{r}
+gercon |> 
+    filter(is.na(populacao_total_do_setor)) |>
+    tabyl(unidadesolicitante) |> 
+    janitor::adorn_pct_formatting() |>
+    arrange(desc(n)) |> 
+    adorn_totals("row")
+```
+
+Um padrão pe ver que nomes de unidades que tem "UNIDADE DE SAUDE" são de fato unidade de APS, e a unidade "ESF NUCLEO ESPERANCA II" tbm. Mas as demais são Equipes especificas que não tem territorio de saúde adiscrito.
+
+```{r}
+# fazer um filtro em gercon, Se a variavel populacao_total_do_setor for NA, e o nome da unidade de solicitacao nao tiver "UNIDADE DE SAUDE" ou "ESF NUCLEO ESPERANCA II", entao filtrar fora do banco gercon
+
+gercon |> 
+    filter((is.na(populacao_total_do_setor) & !str_detect(unidadesolicitante, "UNIDADE DE SAUDE|ESF NUCLEO ESPERANCA II"))) |> 
+    count()
+
+# tem que reduzir 3514 linhas
+
+gercon <- gercon |> 
+    filter(!(is.na(populacao_total_do_setor) & !str_detect(unidadesolicitante, "UNIDADE DE SAUDE|ESF NUCLEO ESPERANCA II")))
+
+dim(gercon)
+
+# OK
+```
+
+Agora precisamos entender o que são essas undiades que ficaram mas não tem Censo de territorio. E se vale a pena manter elas no banco, qual o impacto.
+
+```{r}
+# % de linhas com NA em populacao_total_do_setor
+sum(is.na(gercon$populacao_total_do_setor)) / nrow(gercon) *100
+```
+
+O valor é 0.92% Menos de 1% do banco, então vamos remover essas linhas. 
+
+```{r}
+gercon <- gercon |> 
+    filter(!is.na(populacao_total_do_setor))
+```
+
+Ou seja, Vamos manter unidades de APS que encaminharam no GERCON e tinham seus dados no Censo de 2023, e vamos remover unidades que não são de APS ou que não tem dados no Censo de 2023.
+
+### Variavel complexidade
+
+```{r}
+gercon |> 
+    tabyl(complexidade) |> 
+    janitor::adorn_pct_formatting() |> 
+    arrange(desc(n))
+```
+
+Selecionar os encaminhamentos de MEDIA complexidade
+
+```{r}
+gercon <- gercon |> 
+    filter(complexidade == "MEDIA")
+```
+
+### Variavel datahora_consulta
+
+Se a variavel datahora_consulta for NA, então significa que o paciente não foi nem agendado no servico de atenção segundaria, ou esta na fila de espera. 
+
+```{r}
+gercon |> 
+    filter(is.na(datahora_consulta)) |> 
+    tabyl(situacaoagenda) 
+```
+
+Realmente todos os casos tem situacaoagenda == NA. Com isso, vamos fazer o filtro. 
+
+```{r}
+gercon <- gercon |> 
+    filter(!is.na(datahora_consulta))
+```
+
+### Variavel situacaoagenda
+Vamos verificar a variavel situacaoagenda, que indica se o paciente foi atendido ou não.
+
+```{r}
+gercon |> 
+    tabyl(situacaoagenda) |> 
+    janitor::adorn_pct_formatting() |> 
+    arrange(desc(n))
+```
+
+Vamos realizar o filtro daqueles encaminhamentos e pacientes que temos a confirmação de que foram atendidos ou faltaram a consulta. Ou Seja, 820108 REALIZARAM + 163879 FALTANTES
+
+```{r}
+gercon <- gercon |> 
+    filter(situacaoagenda %in% c("REALIZADA", "FALTANTE"))
+```
+
+
+```{r}
+# Confirmando 
+
+gercon |> 
+    tabyl(situacaoagenda) |> 
+    janitor::adorn_pct_formatting() |> 
+    arrange(desc(n))
+
+# OK
+```
+
+### Variavel corregulador
+
+```{r}
+gercon |> 
+    tabyl(corregulador) |> 
+    janitor::adorn_pct_formatting() |> 
+    arrange(desc(n))
+```
+
+Variavel tem 122 NA. Isso irá atrapalhar na modelagem, então vamos remover essas linhas.
+
+```{r}
+gercon <- gercon |> 
+    filter(!is.na(corregulador))
+```
+
+```{r}
+gercon |> 
+    tabyl(corregulador) |> 
+    janitor::adorn_pct_formatting() |> 
+    arrange(desc(n))
+```
+
+
+### Variavel especialidade e especialidademae
+Variavel que descreve a especialidade que o paciente foi encaminhado. 
+
+```{r}
+gercon |> 
+    tabyl(especialidade) |> 
+    janitor::adorn_pct_formatting() |> 
+    arrange(desc(n))
+```
+
+```{r}
+gercon |> 
+    tabyl(especialidademae) |> 
+    janitor::adorn_pct_formatting() |> 
+    arrange(desc(n))
+```
+
+Especialidade tem uma variabilidade muito grande, e especialidademae tem uma variabilidade menor. Vamos manter a especialidademae, e vamos remover a especialidade.
+
+### Variavel data_solicitacao e datahora_consulta
+
+Analisar a relacao das variveis e suas caracteristicas. 
+```{r}
+gercon |> 
+    select(data_solicitacao, datahora_consulta) |> 
+    summary()
+```
+
+Tem formatos e tamanhos diferentes de string. Min.nchar:10 Max.nchar: 23 . Para fazer as transformações em formato de data isso é um problema. Vamos padronizar para o formato "yyyy-mm-dd hh:mm:ss" e transformar em data.
+
+Pelo jeito, se selecionarmos os 10 primeiros caracteres, teremos o formato "yyyy-mm-dd". 
+
+```{r}
+gercon |> 
+    mutate(data_solicitacao = substr(data_solicitacao, 1, 10),
+           datahora_consulta = substr(datahora_consulta, 1, 10)) |> 
+    select(data_solicitacao, datahora_consulta) |> 
+    summary()
+
+# OK, vamos fazer a transformação.
+gercon<-gercon |> 
+    mutate(data_solicitacao = substr(data_solicitacao, 1, 10),
+           datahora_consulta = substr(datahora_consulta, 1, 10))
+```
+
+### Variaveis cnes_solicitante e cnesexecutante
+
+Vamos ver se isso acontece com as variaveis cnes_solicitante e cnesexecutante.
+```{r}
+gercon |> 
+    select(cnes_solicitante, cnesexecutante) |> 
+    summary()
+```
+
+Tambem acontece, o que é normal para códigos de CNES são 7 caracteres. Os valores encontrados Min.nchar:6  e  Max.nchar:7. Ou seja, tem que padronizar 
+
+```{r}
+gercon |> 
+    mutate(cnes_solicitante = str_pad(as.character(cnes_solicitante), width = 7, side = "left", pad = "0"),
+           cnesexecutante = str_pad(as.character(cnesexecutante), width = 7, side = "left", pad = "0")) |> 
+    select(cnes_solicitante, cnesexecutante) |> 
+    summary()
+
+# ok, vamos fazer a transformação.
+gercon <- gercon |> 
+    mutate(cnes_solicitante = str_pad(as.character(cnes_solicitante), width = 7, side = "left", pad = "0"),
+           cnesexecutante = str_pad(as.character(cnesexecutante), width = 7, side = "left", pad = "0"))
+```
+
+### Variaveis coordenadoria_saude e distrito_sanitario
+```{r}
+gercon |> 
+    tabyl(coordenadoria_saude) |> 
+    janitor::adorn_pct_formatting() |> 
+    arrange(desc(n))
+```
+
+Variavel coordenadoria_saude esta OK
+
+```{r}
+gercon |> 
+    tabyl(distrito_sanitario) |> 
+    janitor::adorn_pct_formatting() |> 
+    arrange(desc(n))
+```
+
+variavel distrito_sanitario tem 1 categoria com problema. "Fechada para reunião 4° quinta-feira do mês 14h as 16h". Vamos ver quantas unidades são:
+
+```{r}
+gercon |> 
+    filter(distrito_sanitario == "Fechada para reunião 4° quinta-feira do mês 14h as 16h") |> 
+    distinct(cnes_solicitante)
+```
+
+Somente a unidade "2264374". Unidade Clínica da Família Diretor Pestana - Distrito dela é HUMAITA/NAVEGANTES. Vamos corrigir o valor da variavel distrito_sanitario para essa unidade.
+
+```{r}
+gercon |> 
+    mutate(distrito_sanitario = ifelse(cnes_solicitante == "2264374", "HUMAITA/NAVEGANTES", distrito_sanitario)) |> 
+    tabyl(distrito_sanitario) |> 
+    janitor::adorn_pct_formatting() |> 
+    arrange(desc(n))
+
+# Ok, vamos fazer a transformação.
+gercon <- gercon |> 
+    mutate(distrito_sanitario = case_when(cnes_solicitante == "2264374" ~ "HUMAITA/NAVEGANTES",
+                          TRUE ~ distrito_sanitario))
+
+```
+
+
+### Selecionar variaveis de interesse
+```{r}
+var_interesse <- c("data_solicitacao", "corregulador", "diasfilaespera", "especialidademae", "cid", "idpaciente", "cnes_solicitante", "situacaoagenda", "datahora_consulta","cnesexecutante",
+"possuiunidadeindicada","favela_comunidade","taxa_alf_geral","coordenadoria_saude","distrito_sanitario", "renda_media_winsor")
+
+gercon <- gercon |> 
+    select(all_of(var_interesse)) |> 
+    mutate(data_solicitacao = ymd(data_solicitacao),    
+           datahora_consulta = ymd(datahora_consulta)) |> 
+    mutate(diasfilaespera = as.numeric(diasfilaespera),
+           renda_media_winsor = as.numeric(renda_media_winsor),
+           favela_comunidade = as.numeric(favela_comunidade),
+           taxa_alf_geral = as.numeric(taxa_alf_geral),
+           renda_media_winsor = as.numeric(renda_media_winsor)) |> 
+    mutate(corregulador = as.factor(corregulador),
+           especialidademae = as.factor(especialidademae),
+           cid = as.factor(cid),
+           situacaoagenda = as.factor(situacaoagenda),
+           possuiunidadeindicada = as.factor(possuiunidadeindicada),
+           coordenadoria_saude = as.factor(coordenadoria_saude),
+           distrito_sanitario = as.factor(distrito_sanitario)) 
+```
+
+#### Salva o banco
+```{r}
+# write_parquet(gercon, here("dados/processados/gercon_poa_censo_reestrurado.parquet"))
+```
+
+## Analise exploratoria
+Vamos fazer uma analise exploratoria do banco de dados, para entender melhor as variaveis e suas caracteristicas. E possiveis processamentos que teramos que fazer antes da modelagem. 
+
+### Variavel situacaoagenda
+
+```{r}
+gercon |> 
+    tabyl(situacaoagenda) |> 
+    janitor::adorn_pct_formatting() |> 
+    arrange(desc(n))
+```
+
+Variavel desbalanceada, com 83% de casos REALIZADA e 17% de casos FALTANTE.
+
+PROBLEMA que vamos ter que pensar. 
+
+#### Analise variavel idpaciente
+
+A literatura mostra que pacientes que faltam a consulta tem maior probabilidade de faltar novamente. Ou seja, pacientes que faltaram uma vez, tem maior probabilidade de faltar novamente. Vamos analisar a variavel idpaciente, para ver quantos pacientes faltaram mais de uma vez.
+
+```{r}
+# agrupar por paciente e calcular, numero de encaminhamentos por paciente. quantos paciente faltam 1 vez, quantos faltam 2 vezes, quantos faltam 3 vezes, + que 3 vezes.
+
+gercon |> 
+    group_by(idpaciente) |> 
+    summarise(faltas = sum(situacaoagenda == "FALTANTE")) |> 
+    mutate(grupo = factor(case_when(faltas == 0 ~ "Nunca faltou",
+                                    faltas == 1 ~ "1 falta",
+                                    faltas == 2 ~ "2 faltas",
+                                    faltas == 3 ~ "3 faltas",
+                                    TRUE ~ "Mais que 3 faltas"),
+                          levels = c("Nunca faltou", "1 falta", "2 faltas", "3 faltas", "Mais que 3 faltas"))) |> 
+    tabyl(grupo) |> 
+    janitor::adorn_pct_formatting() |>
+    adorn_totals("row")
+```
+
+```{r}
+library(ggplot2) 
+library(gtsummary)
+```
+
+Variaveis numericas
+```{r}
+bivariada_numericas<- gercon |>
+  tbl_summary(by = situacaoagenda, missing = "ifany",
+              statistic = list(all_continuous() ~ "{median} ({p25}, {p75})")) |>
+  add_overall() |> add_p() |> add_q(method="bonferroni") |> bold_labels()
+```
+
+
+```{r}
+
+d <- gercon |>
+  mutate(ano_consulta = factor(format(datahora_consulta, "%Y")),
+         mes_consulta = factor(months(datahora_consulta, abbreviate = TRUE),
+                               levels = unique(months(as.Date(paste0("2020-", 1:12, "-01")), TRUE))),
+         ano_solicitacao = factor(format(data_solicitacao, "%Y")),
+         mes_solicitacao = factor(months(data_solicitacao, TRUE), levels = levels(mes_consulta)))
+
+d |> count(ano_consulta, mes_consulta, situacaoagenda) |>
+  group_by(ano_consulta, mes_consulta) |> mutate(pf = n[situacaoagenda=="FALTANTE"]/sum(n)) |>
+  filter(situacaoagenda=="FALTANTE") |>
+  ggplot(aes(mes_consulta, pf, group = ano_consulta, color = ano_consulta)) + geom_line() +
+  scale_y_continuous(labels = scales::percent)
+```
+
+
