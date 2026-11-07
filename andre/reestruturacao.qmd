@@ -218,6 +218,27 @@ gercon<-gercon |>
            datahora_consulta = substr(datahora_consulta, 1, 10))
 ```
 
+Ver se a diferença do tempo entre a data de solicitacao e a data da consulta é coerente com a variavel diasfilaespera.
+```{r}
+    gercon |> 
+        mutate(diasfilaespera_calc = as.numeric(as.Date(datahora_consulta) - as.Date(data_solicitacao))) |> 
+        select(diasfilaespera, diasfilaespera_calc) |> 
+        mutate(diasfilaespera = as.numeric(diasfilaespera)) |>
+        summary()
+```  
+
+No dicionario de dados, a variavel diasfilaespera é descrita como "Quantidade de dias que o paciente fica em fila de espera. Calculado pela diferença em dias entre a data da
+solicitação e a data que foi realizado o agendamento da consulta". Ou seja, não é a diferença da consulta real. 
+
+Vamos criar a variavel diasfilaespera_calc, que é a diferença entre a data da consulta e a data da solicitacao.
+
+```{r}
+gercon <- gercon |> 
+     mutate(data_solicitacao = ymd(data_solicitacao),    
+           datahora_consulta = ymd(datahora_consulta)) |> 
+    mutate(diasfilaespera_calc = as.numeric(datahora_consulta - data_solicitacao))
+```
+
 ### Variaveis cnes_solicitante e cnesexecutante
 
 Vamos ver se isso acontece com as variaveis cnes_solicitante e cnesexecutante.
@@ -241,6 +262,8 @@ gercon <- gercon |>
     mutate(cnes_solicitante = str_pad(as.character(cnes_solicitante), width = 7, side = "left", pad = "0"),
            cnesexecutante = str_pad(as.character(cnesexecutante), width = 7, side = "left", pad = "0"))
 ```
+
+Os 2 CNES são variaveis de alta cardionalidade. Precisamos fazer um tratamento. 
 
 ### Variaveis coordenadoria_saude e distrito_sanitario
 ```{r}
@@ -283,50 +306,24 @@ gercon <- gercon |>
 
 ```
 
-
-### Selecionar variaveis de interesse
-```{r}
-var_interesse <- c("data_solicitacao", "corregulador", "diasfilaespera", "especialidademae", "cid", "idpaciente", "cnes_solicitante", "situacaoagenda", "datahora_consulta","cnesexecutante",
-"possuiunidadeindicada","favela_comunidade","taxa_alf_geral","coordenadoria_saude","distrito_sanitario", "renda_media_winsor")
-
-gercon <- gercon |> 
-    select(all_of(var_interesse)) |> 
-    mutate(data_solicitacao = ymd(data_solicitacao),    
-           datahora_consulta = ymd(datahora_consulta)) |> 
-    mutate(diasfilaespera = as.numeric(diasfilaespera),
-           renda_media_winsor = as.numeric(renda_media_winsor),
-           favela_comunidade = as.numeric(favela_comunidade),
-           taxa_alf_geral = as.numeric(taxa_alf_geral),
-           renda_media_winsor = as.numeric(renda_media_winsor)) |> 
-    mutate(corregulador = as.factor(corregulador),
-           especialidademae = as.factor(especialidademae),
-           cid = as.factor(cid),
-           situacaoagenda = as.factor(situacaoagenda),
-           possuiunidadeindicada = as.factor(possuiunidadeindicada),
-           coordenadoria_saude = as.factor(coordenadoria_saude),
-           distrito_sanitario = as.factor(distrito_sanitario)) 
-```
-
-#### Salva o banco
-```{r}
-# write_parquet(gercon, here("dados/processados/gercon_poa_censo_reestrurado.parquet"))
-```
-
-## Analise exploratoria
-Vamos fazer uma analise exploratoria do banco de dados, para entender melhor as variaveis e suas caracteristicas. E possiveis processamentos que teramos que fazer antes da modelagem. 
-
-### Variavel situacaoagenda
-
+#### Variavel cid
 ```{r}
 gercon |> 
-    tabyl(situacaoagenda) |> 
+    tabyl(cid) |> 
     janitor::adorn_pct_formatting() |> 
     arrange(desc(n))
 ```
 
-Variavel desbalanceada, com 83% de casos REALIZADA e 17% de casos FALTANTE.
+Variavel de alta cardinalidade. 
 
-PROBLEMA que vamos ter que pensar. 
+Vamos criar uma variavel cid_3dig, que é o CID com 3 digitos. E uma variavel cid_1dig, que é o CID com 1 digito. Para tentar reduzir a cardinalidade.
+
+```{r}
+gercon <- gercon |> 
+    mutate(cid_3dig = substr(as.character(cid), 1, 3),
+           cid_1dig = substr(as.character(cid), 1, 1))
+```
+
 
 #### Analise variavel idpaciente
 
@@ -348,6 +345,176 @@ gercon |>
     janitor::adorn_pct_formatting() |>
     adorn_totals("row")
 ```
+
+Para não ter vazamento de dados pensamos em criar uma variavel que indique se o paciente faltou ou não em consultas anteriores. Ou seja, para cada linha do banco, vamos criar uma variavel que indique se o paciente faltou ou não em consultas anteriores.
+
+```{r}
+# --- 0. Variáveis auxiliares --------------------------------------------------
+gercon <- gercon |>
+  mutate(
+    rid      = row_number(),
+    y        = as.integer(situacaoagenda == "FALTANTE"),
+    t0       = data_solicitacao + pmax(as.numeric(diasfilaespera), 0),   # data do agendamento
+    motivo   = paste(especialidademae, cid_3dig, sep = "|")               # especialidademaeecialidade + CID3
+  )
+
+# --- 1. Pares (linha-alvo x consulta anterior do mesmo paciente) --------------
+pacientes_multi <- gercon |> count(idpaciente) |> filter(n >= 2) |> pull(idpaciente)
+
+alvos <- gercon |>
+  filter(idpaciente %in% pacientes_multi) |>
+  select(idpaciente, rid, t0, especialidademae, motivo)
+
+eventos <- gercon |>
+  filter(idpaciente %in% pacientes_multi) |>
+  select(idpaciente, rid_ev = rid, data_ev = datahora_consulta, y,
+         especialidademae_ev = especialidademae, motivo_ev = motivo)
+
+pares <- alvos |>
+  inner_join(eventos, by = "idpaciente", relationship = "many-to-many") |>
+  filter(rid != rid_ev, data_ev < t0) |>     # nunca a própria linha; só consultas anteriores
+  mutate(mesma_especialidademae = especialidademae == especialidademae_ev, mesmo_motivo = motivo == motivo_ev)
+
+# --- 2. Agregações ------------------------------------------------------------
+hist_geral <- pares |>
+  group_by(rid) |>
+  summarise(n_consultas_previas = n(),
+            n_faltas_previas    = sum(y),
+            ultima_falta = if (any(y == 1)) max(data_ev[y == 1]) else as.Date(NA),
+            .groups = "drop")
+
+resumo_ultima <- function(p) {
+  p |> group_by(rid) |>
+    summarise(n_prev   = n(),
+              n_faltas = sum(y),
+              ultimo_y = y[order(data_ev, rid_ev)][n()],   # desfecho da consulta mais recente
+              .groups = "drop")
+}
+
+hist_especialidademae <- pares |> filter(mesma_especialidademae) |> resumo_ultima() |>
+  rename(n_consultas_previas_especialidademae = n_prev, n_faltas_previas_especialidademae = n_faltas,
+         ultimo_y_especialidademae = ultimo_y)
+
+hist_motivo <- pares |> filter(mesmo_motivo) |> resumo_ultima() |>
+  rename(n_consultas_previas_motivo = n_prev, n_faltas_previas_motivo = n_faltas,
+         ultimo_y_motivo = ultimo_y)
+
+# --- 3. Variáveis de histórico ------------------------------------------------
+gercon <- gercon |>
+  left_join(hist_geral,  by = "rid") |>
+  left_join(hist_especialidademae,    by = "rid") |>
+  left_join(hist_motivo, by = "rid") |>
+  mutate(
+    across(c(n_consultas_previas, n_faltas_previas,
+             n_consultas_previas_especialidademae, n_faltas_previas_especialidademae,
+             n_consultas_previas_motivo, n_faltas_previas_motivo),
+           ~ as.integer(coalesce(.x, 0L))),
+    primeira_vez = as.integer(n_consultas_previas == 0),
+    dias_desde_ultima_falta = as.integer(t0 - ultima_falta),   # NA se nunca faltou
+    falta_recente = factor(case_when(
+      is.na(dias_desde_ultima_falta)  ~ "nunca_faltou",
+      dias_desde_ultima_falta <= 90   ~ "ate_90d",
+      dias_desde_ultima_falta <= 365  ~ "91_365d",
+      TRUE                            ~ "mais_de_365d"),
+      levels = c("nunca_faltou", "ate_90d", "91_365d", "mais_de_365d")),
+    ultima_previa_mesma_especialidademae = factor(case_when(
+      is.na(ultimo_y_especialidademae) ~ "sem_previa",
+      ultimo_y_especialidademae == 1   ~ "faltante",
+      TRUE                ~ "realizada"),
+      levels = c("sem_previa", "realizada", "faltante")),
+    ultima_previa_mesmo_motivo = factor(case_when(
+      is.na(ultimo_y_motivo) ~ "sem_previa",
+      ultimo_y_motivo == 1   ~ "faltante",
+      TRUE                   ~ "realizada"),
+      levels = c("sem_previa", "realizada", "faltante"))
+  )
+
+# --- 4. Variáveis de tempo e calendário ---------------------------------------
+# Atenção: dias_ate_consulta = diasfilaespera + antecedencia_agendamento.
+# Use apenas UMA das parametrizações no modelo:
+#   (a) dias_ate_consulta  ou  (b) diasfilaespera + antecedencia_agendamento
+gercon <- gercon |>
+  mutate(
+    dias_ate_consulta        = as.integer(datahora_consulta - data_solicitacao),
+    antecedencia_agendamento = dias_ate_consulta - as.integer(diasfilaespera),
+    dia_semana = factor(wday(datahora_consulta, week_start = 1),
+                        levels = 1:7,
+                        labels = c("seg", "ter", "qua", "qui", "sex", "sab", "dom")),
+    mes_consulta = factor(month(datahora_consulta), levels = 1:12)
+  )
+```
+
+
+### Selecionar variaveis de interesse
+```{r}
+var_interesse <- c(
+  # identificação e auditoria (saem antes do modelo)
+  "idsolicitacao", "idpaciente", "data_solicitacao", "datahora_consulta", "rid", "t0",
+  # desfecho
+  "situacaoagenda",
+  # encaminhamento
+  "corregulador", "especialidademae", "cid_3dig", "cid_1dig", "possuiunidadeindicada",
+  # tempo
+  "dias_ate_consulta", "dia_semana", "mes_consulta",
+  # paciente
+  "idade",
+  # histórico geral
+  "n_consultas_previas", "n_faltas_previas", "falta_recente", "primeira_vez",
+  # histórico por especialidade
+  "n_consultas_previas_especialidademae", "n_faltas_previas_especialidademae",
+  "ultima_previa_mesma_especialidademae",
+  # histórico por motivo
+  "n_consultas_previas_motivo", "n_faltas_previas_motivo", "ultima_previa_mesmo_motivo",
+  # unidades
+  "cnes_solicitante", "cnesexecutante",
+  # censo
+  "favela_comunidade", "taxa_alf_geral", "renda_media_winsor",
+  "coordenadoria_saude", "distrito_sanitario"
+)
+
+gercon <- gercon |> select(all_of(var_interesse))
+
+gercon <- gercon |>
+  mutate(
+    across(c(idsolicitacao, idpaciente, cid_3dig, cnes_solicitante, cnesexecutante), as.character),
+    across(c(data_solicitacao, datahora_consulta, t0), as.Date),
+    rid = as.integer(rid),
+    situacaoagenda = factor(situacaoagenda, levels = c("FALTANTE", "REALIZADA")),
+    across(c(corregulador, especialidademae, possuiunidadeindicada, cid_1dig,
+             coordenadoria_saude, distrito_sanitario,
+             falta_recente, ultima_previa_mesma_especialidademae,
+             ultima_previa_mesmo_motivo, dia_semana, mes_consulta), as.factor),
+    across(c(dias_ate_consulta, primeira_vez, starts_with("n_consultas_previas"),
+             starts_with("n_faltas_previas")), as.integer),
+    across(c(idade, favela_comunidade, taxa_alf_geral, renda_media_winsor), as.numeric)
+  )
+
+# conferência
+sapply(gercon, function(x) class(x)[1])
+```
+
+#### Salva o banco
+```{r}
+write_parquet(gercon, here("dados/processados/gercon_poa_censo_reestrurado.parquet"))
+```
+
+## Analise exploratoria
+Vamos fazer uma analise exploratoria do banco de dados, para entender melhor as variaveis e suas caracteristicas. E possiveis processamentos que teramos que fazer antes da modelagem. 
+
+### Variavel situacaoagenda
+
+```{r}
+gercon |> 
+    tabyl(situacaoagenda) |> 
+    janitor::adorn_pct_formatting() |> 
+    arrange(desc(n))
+```
+
+Variavel desbalanceada, com 83% de casos REALIZADA e 17% de casos FALTANTE.
+
+PROBLEMA que vamos ter que pensar. 
+
+
 
 ```{r}
 library(ggplot2) 
