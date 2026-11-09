@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="André Bueno">
+<meta name="author" content="André, Guilherme, Felipe">
 
 <title>Exploração — GERCON POA</title>
 <style>
@@ -27,37 +27,78 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
 <script src="01-exploracao_files/libs/clipboard/clipboard.min.js"></script>
 <script src="01-exploracao_files/libs/quarto-html/quarto.js" type="module"></script>
 <script src="01-exploracao_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="01-exploracao_files/libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="01-exploracao_files/libs/quarto-html/popper.min.js"></script>
 <script src="01-exploracao_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="01-exploracao_files/libs/quarto-html/anchor.min.js"></script>
 <link href="01-exploracao_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="01-exploracao_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="01-exploracao_files/libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="01-exploracao_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="01-exploracao_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="01-exploracao_files/libs/bootstrap/bootstrap-26824b7b00a5261339156b0326b5fe6d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="01-exploracao_files/libs/bootstrap/bootstrap-5acdb450ad344587af934c399d9de848.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
 
-<body class="quarto-light">
+<body class="quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Saltar para o conteúdo principal</a>
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-  <nav id="TOC" role="doc-toc" class="toc-active">
+  <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">Índice</h2>
    
   <ul>
   <li><a href="#bibliotecas" id="toc-bibliotecas" class="nav-link active" data-scroll-target="#bibliotecas">Bibliotecas</a></li>
+  <li><a href="#banco-de-dados" id="toc-banco-de-dados" class="nav-link" data-scroll-target="#banco-de-dados">Banco de dados</a>
+  <ul class="collapse">
+  <li><a href="#selecão-de-variáveis" id="toc-selecão-de-variáveis" class="nav-link" data-scroll-target="#selecão-de-variáveis">Selecão de variáveis</a></li>
+  <li><a href="#análise-das-variáveis-relacionadas-ao-desfecho" id="toc-análise-das-variáveis-relacionadas-ao-desfecho" class="nav-link" data-scroll-target="#análise-das-variáveis-relacionadas-ao-desfecho">Análise das variáveis relacionadas ao desfecho</a></li>
+  </ul></li>
   </ul>
 </nav>
 </div>
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -71,14 +112,14 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Autor</div>
     <div class="quarto-title-meta-contents">
-             <p>André Bueno </p>
+             <p>André, Guilherme, Felipe </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Data de Publicação</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">20 de outubro de 2026</p>
+      <p class="date">7 de novembro de 2026</p>
     </div>
   </div>
   
@@ -92,7 +133,362 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="bibliotecas" class="level1">
 <h1>Bibliotecas</h1>
-<p>library(dplyr) library(ggplot2) library(arrow) library(gtsummary) library(janitor) library(lubridate) library(summarytools)</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(arrow) </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary) </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor) </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate) </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(summarytools)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p><a href="https://drive.google.com/drive/folders/1qKnh2IpN5_D_PhOnMdAViHa8L-FK5LFA?usp=sharing">Drive_banco</a></p>
+</section>
+<section id="banco-de-dados" class="level1">
+<h1>Banco de dados</h1>
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Banco</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> arrow<span class="sc">::</span><span class="fu">open_dataset</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"dados"</span>, <span class="st">"processados"</span>, <span class="st">"gercon_poa_censo.parquet"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">collect</span>() <span class="sc">|&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visão geral</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>dados <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 2,246,275
+Columns: 113
+$ data_extracao                         &lt;chr&gt; "2025-01-07 00:00:00.000", "2025…
+$ idsolicitacao                         &lt;chr&gt; "747495", "756290", "806777", "7…
+$ situacaosolicitacao                   &lt;chr&gt; "REALIZADA", "REALIZADA", "REALI…
+$ data_solicitacao                      &lt;chr&gt; "2018-02-20 00:00:00.000", "2018…
+$ corregulador                          &lt;chr&gt; "AMARELO", "AZUL", "AZUL", "LARA…
+$ diasfilaespera                        &lt;chr&gt; "17", "14", "1", "5", "0", "1", …
+$ complexidade                          &lt;chr&gt; "MEDIA", "MEDIA", "MEDIA", "MEDI…
+$ especialidade                         &lt;chr&gt; "CIRURGIA BUCOMAXILOFACIAL CEO",…
+$ especialidademae                      &lt;chr&gt; "CIRURGIA BUCOMAXILOFACIAL", "CI…
+$ cid                                   &lt;chr&gt; "K011", "K021", "K011", "K061", …
+$ idpaciente                            &lt;chr&gt; "520120", "524958", "403356", "2…
+$ municipio_residencia                  &lt;chr&gt; "PORTO ALEGRE", "PORTO ALEGRE", …
+$ idade                                 &lt;chr&gt; "27", "53", "29", "46", "63", "2…
+$ cnes_solicitante                      &lt;chr&gt; "2265133", "2237911", "2264838",…
+$ unidadesolicitante                    &lt;chr&gt; "UNIDADE DE SAUDE SESC", "UNIDAD…
+$ tipounidade                           &lt;chr&gt; "CENTRO DE SAUDE/UNIDADE BASICA"…
+$ municipiosolicitante                  &lt;chr&gt; "PORTO ALEGRE", "PORTO ALEGRE", …
+$ situacaoagenda                        &lt;chr&gt; "REALIZADA", "REALIZADA", "REALI…
+$ datahora_consulta                     &lt;chr&gt; "2018-03-21 00:00:00.000", "2018…
+$ cnesexecutante                        &lt;chr&gt; "7031092", "7031092", "7031092",…
+$ unidadeexecutante                     &lt;chr&gt; "CENTRO DE ESPECIALIDADES ODONTO…
+$ municipio_executante                  &lt;chr&gt; "PORTO ALEGRE", "PORTO ALEGRE", …
+$ statusregionalizacao                  &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, …
+$ centralregulacao                      &lt;chr&gt; "REGULACAO AMBULATORIAL", "REGUL…
+$ centralregulacaoorigem                &lt;chr&gt; "REGULACAO AMBULATORIAL", "REGUL…
+$ tipoconsulta                          &lt;chr&gt; "PRIMEIRA", "PRIMEIRA", "PRIMEIR…
+$ coordenadoriasolicitante              &lt;chr&gt; "1ª CRS", "1ª CRS", "1ª CRS", "1…
+$ regiaosaudesolicitante                &lt;chr&gt; "REGIÃO DE SAÚDE 10", "REGIÃO DE…
+$ possuiunidadeindicada                 &lt;chr&gt; "SIM", "SIM", "NÃO", "NÃO", "NÃO…
+$ cod_ibge_municipio_executante_7d      &lt;chr&gt; "4314902", "4314902", "4314902",…
+$ cod_ibge_municipio_executante_6d      &lt;chr&gt; "431490", "431490", "431490", "4…
+$ uf_executante                         &lt;chr&gt; "RS", "RS", "RS", "RS", "RS", "R…
+$ arquivo_origem                        &lt;chr&gt; "gercon_solicitacoes_2018.csv", …
+$ censo_unidade_saude                   &lt;chr&gt; "US SESC", "US Safira Nova", "US…
+$ populacao_total_do_setor              &lt;dbl&gt; 7338, 7507, 20682, 19959, 20967,…
+$ populacao_alocada_a_us                &lt;dbl&gt; 3907.407, 4492.872, 11263.645, 1…
+$ fator_proporcao                       &lt;dbl&gt; 9.769914, 5.748879, 22.631887, 1…
+$ baixo_patamar                         &lt;dbl&gt; 0.0000000, 0.0000000, 2.0793151,…
+$ favela_comunidade                     &lt;dbl&gt; 10.235504, 34.324491, 13.014997,…
+$ hospital_ilpi                         &lt;dbl&gt; 0.0000000, 0.0000000, 0.0000000,…
+$ indigena                              &lt;dbl&gt; 0.000000, 0.000000, 0.000000, 5.…
+$ nao_especial                          &lt;dbl&gt; 89.764496, 65.675509, 84.905688,…
+$ prisional                             &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ quartel                               &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ quilombola                            &lt;dbl&gt; 0.0000000, 0.0000000, 0.0000000,…
+$ area_km2_ponderada                    &lt;dbl&gt; 0.5672338, 1.7611513, 9.2964800,…
+$ taxa_alf_geral                        &lt;dbl&gt; 96.91311, 95.20745, 97.28708, 94…
+$ taxa_alf_masc                         &lt;dbl&gt; 44.83099, 44.68360, 44.97912, 44…
+$ taxa_alf_fem                          &lt;dbl&gt; 52.08213, 50.52385, 52.30796, 50…
+$ pct_masc                              &lt;dbl&gt; 46.95789, 47.46532, 47.30542, 48…
+$ pct_fem                               &lt;dbl&gt; 53.04211, 52.53468, 52.69458, 51…
+$ pct_0_4_m                             &lt;dbl&gt; 2.268982, 3.410036, 2.493992, 3.…
+$ pct_5_9_m                             &lt;dbl&gt; 2.532395, 4.205574, 2.812526, 5.…
+$ pct_10_14_m                           &lt;dbl&gt; 2.716909, 4.718456, 3.074589, 4.…
+$ pct_15_19_m                           &lt;dbl&gt; 2.559574, 3.582560, 3.353772, 4.…
+$ pct_20_24_m                           &lt;dbl&gt; 3.219624, 4.484615, 4.029118, 4.…
+$ pct_25_29_m                           &lt;dbl&gt; 4.023194, 3.902775, 3.807043, 3.…
+$ pct_30_39_m                           &lt;dbl&gt; 7.186489, 6.525250, 7.464090, 6.…
+$ pct_40_49_m                           &lt;dbl&gt; 6.447581, 6.856049, 6.540317, 6.…
+$ pct_50_59_m                           &lt;dbl&gt; 6.454064, 4.265071, 5.772307, 4.…
+$ pct_60_69_m                           &lt;dbl&gt; 5.519405, 3.695714, 4.588508, 2.…
+$ pct_70_m                              &lt;dbl&gt; 4.021082, 1.819215, 3.263045, 1.…
+$ pct_0_4_f                             &lt;dbl&gt; 2.191529, 4.380803, 2.129827, 3.…
+$ pct_5_9_f                             &lt;dbl&gt; 2.377548, 4.617371, 2.770267, 4.…
+$ pct_10_14_f                           &lt;dbl&gt; 2.506288, 3.940215, 2.717532, 4.…
+$ pct_15_19_f                           &lt;dbl&gt; 2.808758, 3.577657, 3.080209, 4.…
+$ pct_20_24_f                           &lt;dbl&gt; 3.856779, 4.790609, 4.145207, 4.…
+$ pct_25_29_f                           &lt;dbl&gt; 3.502296, 4.665338, 3.592299, 4.…
+$ pct_30_39_f                           &lt;dbl&gt; 7.045994, 7.700975, 7.704144, 7.…
+$ pct_40_49_f                           &lt;dbl&gt; 7.120496, 6.492254, 7.653184, 6.…
+$ pct_50_59_f                           &lt;dbl&gt; 7.113804, 5.213989, 7.179008, 5.…
+$ pct_60_69_f                           &lt;dbl&gt; 7.092606, 4.292208, 6.024173, 3.…
+$ pct_70_f                              &lt;dbl&gt; 7.371938, 2.862723, 5.636181, 2.…
+$ pct_branca                            &lt;dbl&gt; 62.34289, 54.00687, 67.85382, 50…
+$ pct_parda                             &lt;dbl&gt; 14.751917, 22.973672, 15.211644,…
+$ pct_preta                             &lt;dbl&gt; 22.777092, 22.960232, 16.832239,…
+$ pct_amarela                           &lt;dbl&gt; 0.128096422, 0.000000000, 0.0377…
+$ pct_indigena                          &lt;dbl&gt; 0.00000000, 0.05922398, 0.064512…
+$ total_responsaveis                    &lt;dbl&gt; 1562.2232, 1548.9466, 4472.1236,…
+$ dom_particulares_permanentes_ocupados &lt;dbl&gt; 1562.2232, 1548.9466, 4472.1236,…
+$ dom_improvisados_ocupados             &lt;dbl&gt; 3.000000, 0.000000, 0.000000, 9.…
+$ dom_coletivos_com_morador             &lt;dbl&gt; 5.000000, 1.838710, 141.116882, …
+$ dom_uso_ocasional                     &lt;dbl&gt; 52.33545, 33.81964, 236.29222, 1…
+$ dom_vagos                             &lt;dbl&gt; 326.0566, 203.4705, 815.3200, 49…
+$ coordenadoria_saude                   &lt;chr&gt; "LESTE", "LESTE", "LESTE", "SUL"…
+$ distrito_sanitario                    &lt;chr&gt; "LESTE", "NORDESTE", "PARTENON",…
+$ n_enderecos_total                     &lt;dbl&gt; 2301, 1980, 6158, 5391, 6095, 34…
+$ n_domic_privados                      &lt;dbl&gt; 1954, 1789, 5532, 4861, 5551, 31…
+$ n_domic_coletivos                     &lt;dbl&gt; 2, 0, 15, 1, 5, 1, 197, 0, 0, 0,…
+$ n_est_ensino                          &lt;dbl&gt; 4, 3, 18, 6, 7, 8, 158, 0, 2, 4,…
+$ n_est_saude                           &lt;dbl&gt; 2, 1, 4, 2, 2, 1, 526, 2, 1, 2, …
+$ n_est_outras_final                    &lt;dbl&gt; 263, 122, 526, 327, 309, 165, 92…
+$ n_construcao_reforma                  &lt;dbl&gt; 66, 53, 51, 157, 206, 115, 458, …
+$ n_est_religiosos                      &lt;dbl&gt; 10, 12, 10, 37, 15, 16, 58, 5, 1…
+$ n_casas                               &lt;dbl&gt; 1563, 1669, 2840, 4688, 4923, 30…
+$ n_vilas_condos                        &lt;dbl&gt; 31, 23, 339, 57, 45, 67, 350, 38…
+$ n_apartamentos                        &lt;dbl&gt; 354, 93, 2346, 29, 580, 13, 6471…
+$ n_outras_edif                         &lt;dbl&gt; 8, 4, 22, 88, 8, 6, 348, 1, 3, 4…
+$ densidade_hab_km2                     &lt;dbl&gt; 6888.5294, 2551.0996, 1211.6032,…
+$ densidade_enderecos_km2               &lt;dbl&gt; 4056.5282, 1124.2646, 662.4013, …
+$ pct_apartamentos                      &lt;dbl&gt; 15.3846154, 4.6969697, 38.096784…
+$ renda_media_winsor                    &lt;dbl&gt; 2760.801, 1659.904, 3993.913, 17…
+$ renda_dp                              &lt;dbl&gt; 2878.7120, 1079.2106, 4774.6912,…
+$ renda_cv                              &lt;dbl&gt; 104.27091, 65.01645, 119.54920, …
+$ n_setores_renda_ok                    &lt;dbl&gt; 16, 12, 34, 28, 30, 12, 300, 11,…
+$ flag_renda_suspeita                   &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALS…
+$ pop_grade2022                         &lt;dbl&gt; 3324, 4217, 11777, 13699, 10678,…
+$ pop_hrsl                              &lt;dbl&gt; 5332.220, 2854.099, 10070.126, 1…
+$ dif_pct                               &lt;dbl&gt; -14.93079383, -6.14022307, 4.557…
+$ flag_recuperada                       &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, …
+$ origem_setor                          &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, …
+$ setor_censitario                      &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, …
+$ bairro_setor                          &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, …</code></pre>
+</div>
+</div>
+<section id="selecão-de-variáveis" class="level2">
+<h2 class="anchored" data-anchor-id="selecão-de-variáveis">Selecão de variáveis</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filtrar as variáveis de interesse</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>dados<span class="ot">&lt;-</span>dados <span class="sc">|&gt;</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(idsolicitacao,situacaosolicitacao,data_solicitacao,corregulador,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  diasfilaespera,complexidade,especialidademae,cid,idpaciente,idade,cnes_solicitante,situacaoagenda,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  datahora_consulta,cnesexecutante, possuiunidadeindicada, favela_comunidade,taxa_alf_geral,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  coordenadoria_saude,distrito_sanitario, renda_media_winsor) <span class="sc">|&gt;</span> </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(complexidade<span class="sc">==</span><span class="st">"MEDIA"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="at">censo_favela_comunidade =</span> favela_comunidade,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">censo_taxa_alfabetizacao =</span> taxa_alf_geral,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">censo_coordenadoria_saude =</span> coordenadoria_saude,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>           <span class="at">censo_distrito_sanitario =</span> distrito_sanitario,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>           <span class="at">censo_renda_media_winsor =</span> renda_media_winsor)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Transformações de variáveis</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>datas<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"data_solicitacao"</span>,<span class="st">"datahora_consulta"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>categoricas<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"situacaosolicitacao"</span>,<span class="st">"corregulador"</span>,<span class="st">"complexidade"</span>,<span class="st">"especialidademae"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>              <span class="st">"cid"</span>,<span class="st">"cnes_solicitante"</span>,<span class="st">"situacaoagenda"</span>,<span class="st">"cnesexecutante"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>              <span class="st">"possuiunidadeindicada"</span>,<span class="st">"censo_coordenadoria_saude"</span>,<span class="st">"censo_distrito_sanitario"</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>numericas<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"diasfilaespera"</span>,<span class="st">"idade"</span>,<span class="st">"censo_taxa_alfabetizacao"</span>,<span class="st">"censo_renda_media_winsor"</span>,<span class="st">"censo_favela_comunidade"</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>dados<span class="ot">&lt;-</span>dados <span class="sc">|&gt;</span> </span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(datas), ymd_hms)) <span class="sc">|&gt;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(categoricas), as.factor)) <span class="sc">|&gt;</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(numericas), as.numeric))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtrar a variavel complexidade para "MEDIA"</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>dados<span class="ot">&lt;-</span>dados <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(complexidade<span class="sc">==</span><span class="st">"MEDIA"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>complexidade)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Deixe o banco de dados com o seguinte referencial APS —-&gt; Serviço Especializado (Média complexidade)</p>
+</section>
+<section id="análise-das-variáveis-relacionadas-ao-desfecho" class="level2">
+<h2 class="anchored" data-anchor-id="análise-das-variáveis-relacionadas-ao-desfecho">Análise das variáveis relacionadas ao desfecho</h2>
+<section id="datahora_consulta" class="level4">
+<h4 class="anchored" data-anchor-id="datahora_consulta">datahora_consulta</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Análise das variáveis relacionadas ao desfecho </span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>dados <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(datahora_consulta) <span class="sc">|&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  summarytools<span class="sc">::</span><span class="fu">dfSummary</span>()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Data Frame Summary  
+dados  
+Dimensions: 2037984 x 1  
+Duplicates: 2035798  
+
+-------------------------------------------------------------------------------------------------------------
+No   Variable            Stats / Values      Freqs (% of Valid)     Graph                 Valid     Missing  
+---- ------------------- ------------------- ---------------------- --------------------- --------- ---------
+1    datahora_consulta   min : 2018-01-03    2185 distinct values               : : .     1207309   830675   
+     [POSIXct,           med : 2022-05-03                               :     : : : : :   (59.2%)   (40.8%)  
+     POSIXt]             max : 2025-02-13                             . :   : : : : : :                      
+                         range : 7y 1m 10d                          . : : : : : : : : :                      
+                                                                    : : : : : : : : : :                      
+-------------------------------------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>40.8% - Missing - ou seja, não temos como prever se a consulta foi realizada ou não.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#filtar encaminhamentos que não tem datahora_consulta</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>dados<span class="ot">&lt;-</span>dados <span class="sc">|&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(datahora_consulta))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="relacao-situacao_solicitacao-e-situacao_agenda" class="level4">
+<h4 class="anchored" data-anchor-id="relacao-situacao_solicitacao-e-situacao_agenda">relacao situacao_solicitacao e situacao_agenda</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tabela cruzada entre situacao_solicitacao e situacao_agenda</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>dados <span class="sc">|&gt;</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabyl</span>(situacaosolicitacao, situacaoagenda) <span class="sc">|&gt;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_totals</span>(<span class="fu">c</span>(<span class="st">"row"</span>, <span class="st">"col"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_percentages</span>(<span class="st">"row"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_pct_formatting</span>(<span class="at">digits =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>    situacaosolicitacao AGENDA_CONFIRMADA AGENDADA FALTANTE REALIZADA
+      AGENDA_CONFIRMADA             98.0%     0.0%     1.2%      0.0%
+               AGENDADA              0.0%    97.7%     2.3%      0.0%
+  AGUARDA_MATRICIAMENTO                 -        -        -         -
+    AGUARDA_REAVALIACAO              0.0%     0.0%   100.0%      0.0%
+      AGUARDA_REGULACAO                 -        -        -         -
+       AGUARDA_REVERSAO              0.0%     0.0%   100.0%      0.0%
+ AUTORIZACAO_AUTOMATICA                 -        -        -         -
+             AUTORIZADA              0.0%     0.0%    97.6%      0.0%
+              CANCELADA              0.0%     0.0%    97.3%      0.0%
+ CANCELADA_SEM_REVERSAO              0.0%     0.0%    97.6%      0.0%
+   CONFIRMACAO_EXPIRADA              0.0%     0.0%   100.0%      0.0%
+       EM_MATRICIAMENTO                 -        -        -         -
+     ENCAMINHADA_AO_NIR              0.0%     0.0%   100.0%      0.0%
+              ENCERRADA              8.6%     0.0%    14.9%     73.6%
+               PENDENTE              0.0%     0.0%   100.0%      0.0%
+              REALIZADA              0.0%     0.0%     1.6%     95.3%
+                  Total             20.5%     0.2%    12.8%     64.1%
+ TRANSFERIDA  Total
+        0.8% 100.0%
+        0.0% 100.0%
+           - 100.0%
+        0.0% 100.0%
+           - 100.0%
+        0.0% 100.0%
+           - 100.0%
+        2.4% 100.0%
+        2.7% 100.0%
+        2.4% 100.0%
+        0.0% 100.0%
+           - 100.0%
+        0.0% 100.0%
+        2.8% 100.0%
+        0.0% 100.0%
+        3.0% 100.0%
+        2.5% 100.0%</code></pre>
+</div>
+</div>
+<p>Para nós vai valer a pena FALTANTE e REALIZADA. Depois poderiamos pegar os casos que tem AGENDA_CONFIRMADA e AGENDADA para ver na atualização do GERCON o que aconteceu com elas.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filtrar para faltante e realizada</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>dados<span class="ot">&lt;-</span>dados <span class="sc">|&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(situacaoagenda <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"FALTANTE"</span>,<span class="st">"REALIZADA"</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dados <span class="sc">|&gt;</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabyl</span>(situacaosolicitacao, situacaoagenda) <span class="sc">|&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_totals</span>(<span class="fu">c</span>(<span class="st">"row"</span>, <span class="st">"col"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_percentages</span>(<span class="st">"row"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_pct_formatting</span>(<span class="at">digits =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>    situacaosolicitacao AGENDA_CONFIRMADA AGENDADA FALTANTE REALIZADA
+      AGENDA_CONFIRMADA              0.0%     0.0%    99.8%      0.2%
+               AGENDADA              0.0%     0.0%   100.0%      0.0%
+  AGUARDA_MATRICIAMENTO                 -        -        -         -
+    AGUARDA_REAVALIACAO              0.0%     0.0%   100.0%      0.0%
+      AGUARDA_REGULACAO                 -        -        -         -
+       AGUARDA_REVERSAO              0.0%     0.0%   100.0%      0.0%
+ AUTORIZACAO_AUTOMATICA                 -        -        -         -
+             AUTORIZADA              0.0%     0.0%   100.0%      0.0%
+              CANCELADA              0.0%     0.0%   100.0%      0.0%
+ CANCELADA_SEM_REVERSAO              0.0%     0.0%   100.0%      0.0%
+   CONFIRMACAO_EXPIRADA              0.0%     0.0%   100.0%      0.0%
+       EM_MATRICIAMENTO                 -        -        -         -
+     ENCAMINHADA_AO_NIR              0.0%     0.0%   100.0%      0.0%
+              ENCERRADA              0.0%     0.0%    16.9%     83.1%
+               PENDENTE              0.0%     0.0%   100.0%      0.0%
+              REALIZADA              0.0%     0.0%     1.7%     98.3%
+                  Total              0.0%     0.0%    16.7%     83.3%
+ TRANSFERIDA  Total
+        0.0% 100.0%
+        0.0% 100.0%
+           - 100.0%
+        0.0% 100.0%
+           - 100.0%
+        0.0% 100.0%
+           - 100.0%
+        0.0% 100.0%
+        0.0% 100.0%
+        0.0% 100.0%
+        0.0% 100.0%
+           - 100.0%
+        0.0% 100.0%
+        0.0% 100.0%
+        0.0% 100.0%
+        0.0% 100.0%
+        0.0% 100.0%</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># salvar o resultado num arquivo parquet</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>arrow<span class="sc">::</span><span class="fu">write_parquet</span>(dados, here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"dados"</span>, <span class="st">"processados"</span>, <span class="st">"gercon_poa_censo_filtrado.parquet"</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+</section>
 </section>
 
 </main>
@@ -175,7 +571,8 @@ ul.task-list li input[type="checkbox"] {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -184,8 +581,69 @@ ul.task-list li input[type="checkbox"] {
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -199,6 +657,7 @@ ul.task-list li input[type="checkbox"] {
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -361,44 +820,54 @@ ul.task-list li input[type="checkbox"] {
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -496,6 +965,9 @@ ul.task-list li input[type="checkbox"] {
       }
     }
   });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Código deslocável","output":"Saída deslocável"};
   </script>
 </div> <!-- /content -->
 

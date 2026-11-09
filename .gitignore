@@ -1,0 +1,6 @@
+venv
+R/01-exploracao_cache/html
+R/01-*
+andre/modelagem_files
+dados/*
+guilherme/dados

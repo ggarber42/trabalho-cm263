@@ -1,4 +1,4 @@
-# Modelagem dos dados
+# Modelagem dos df
 ## libs
 ```{python}
 ## Carregando as bibliotecas básicas necessárias
@@ -32,57 +32,72 @@ SEED = 42
 np.random.seed(SEED)
 ```
 
-# Dados
-Carregar os dados filtrados do censo do gercon de Porto Alegre. E com as infromações de distancia 
+# df
+Carregar os df filtrados do censo do gercon de Porto Alegre. E com as infromações de distancia 
 
 ```{python}
-dados = pd.read_parquet("dados/processados/gercon_poa_pronto.parquet", engine='pyarrow')
+from pathlib import Path
+
+BASE_DIR = Path.cwd()
+
+if not (BASE_DIR / "dados").exists():
+    BASE_DIR = BASE_DIR.parent
+
+arquivo = BASE_DIR / "dados" / "processados" / "gercon_poa_pronto.parquet"
+
+print("Dataset:", arquivo)
+print("Exists:", arquivo.exists())
+
+df = pd.read_parquet(arquivo, engine="pyarrow")
+
+
+#df = pd.read_parquet("/andre/df/processados/gercon_poa_pronto.parquet", engine='pyarrow')
 ```
 
 
 # Descritiva dos dados
 
 ```{python}
-dados.info()
-dados.describe()
-dados.dtypes.to_frame("dtype").assign(nulos=dados.isna().sum(), distintos=dados.nunique()).reset_index(names="coluna")
+df.info()
+df.describe()
+df.dtypes.to_frame("dtype").assign(nulos=df.isna().sum(), distintos=df.nunique()).reset_index(names="coluna")
 ```
 
 ```{python}
-s = dados["situacaoagenda"]
+s = df["situacaoagenda"]
 tab = s.value_counts(dropna=False).to_frame("absoluta")
 tab["relativa_pct"] = (s.value_counts(dropna=False, normalize=True) * 100).round(2)
 tab.index.name = "situacaoagenda"
 tab
 ```
 
-Dados desbalanciados. Vamos precisar de tecnicas de oversampling ou undersampling e SMOTE para balancear o dataset.
+Dados desbalanceados. Vamos precisar de tecnicas de oversampling ou undersampling e SMOTE para balancear o dataset.
 
-# Preparar
+# Preparação Manual
 ```{python}
 # Remover colunas irrelevantes
-dados.drop(['idpaciente'], axis=1, inplace=True)
+df.drop(['idpaciente'], axis=1, inplace=True)
 
 # Variaveis categoricas e numericas
 # categoricas - corregulador,especialidademae,cid,cnes_solicitante,cnesexecutante,possuiunidadeindicada censo_coordenadoria_saude, censo_distrito_sanitario
 
 cols_categoricas = ["corregulador", "especialidademae", "cid", "cnes_solicitante", "cnesexecutante", "possuiunidadeindicada", "censo_coordenadoria_saude", "censo_distrito_sanitario"]
-dados[[c for c in cols_categoricas if c in dados.columns]].dtypes.to_frame("dtype").assign(n_unique=lambda d: [dados[c].nunique() for c in d.index])
+df[[c for c in cols_categoricas if c in df.columns]].dtypes.to_frame("dtype").assign(n_unique=lambda d: [df[c].nunique() for c in d.index])
 
 # variaveis numericas - diasfilaespera, idade, censo_favela_comunidade, censo_taxa_alfabetizacao, censo_renda_media_winsor, distancia_km, tempo_caminhando, distancia_km_trans_publico, tempo_desloc_trans_publico, quant_bus, baldiacoes
 
 cols_numericas = ["diasfilaespera", "idade", "censo_favela_comunidade", "censo_taxa_alfabetizacao", "censo_renda_media_winsor", "distancia_km", "tempo_caminhando", "distancia_km_trans_publico", "tempo_desloc_trans_publico", "quant_bus", "baldiacoes"]
-dados[[c for c in cols_numericas if c in dados.columns]].dtypes.to_frame("dtype").assign(n_unique=lambda d: [dados[c].nunique() for c in d.index])
+df[[c for c in cols_numericas if c in df.columns]].dtypes.to_frame("dtype").assign(n_unique=lambda d: [df[c].nunique() for c in d.index])
 
 # Transformar target em binário
-dados['situacaoagenda'] = dados['situacaoagenda'].map({'REALIZADA': 1, 'FALTANTE': 0})
+df['situacaoagenda'] = df['situacaoagenda'].map({'REALIZADA': 1, 'FALTANTE': 0})
 
-print(f"Shape do dataset: {dados.shape}")
+print(f"Shape do dataset: {df.shape}")
 print(f"Colunas numéricas: {list(cols_numericas)}")
 print(f"Colunas categóricas: {list(cols_categoricas)}")
 ```
 
-# Parte 1: Transformação de Dados
+# Parte 1: Transformação de df
 ## 1.1 Divisão treino/teste
 
 Realizar a divisão em treino e teste, mantendo a proporção da variável situacaoagenda. A divisão será de 70% para treino e 30% para teste, pela variavel situacaoagenda. 
@@ -90,8 +105,8 @@ Realizar a divisão em treino e teste, mantendo a proporção da variável situa
 ```{python}
 from sklearn.model_selection import train_test_split
 
-X = dados.drop("situacaoagenda", axis=1)
-y = dados["situacaoagenda"]
+X = df.drop("situacaoagenda", axis=1)
+y = df["situacaoagenda"]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
@@ -140,18 +155,18 @@ for col in cols_numericas:
 ### Distribuição de diasfilaespera
 Ao remover distancia_km > 50 e fazer uma descritiva de X_train . muda?
 ```{python}
-X_train[X_train['diasfilaespera'] <= 1000].describe().round(2)
+X_train[X_train['diasfilaespera'] <= 1000]['diasfilaespera'].describe().round(2)
 
 ```
 
 ### Distribuição de distancia_km
 Ao remover distancia_km > 50 e fazer uma descritiva de X_train . muda?
 ```{python}
-X_train[X_train['distancia_km'] <= 50].describe().round(2)
+X_train[X_train['distancia_km'] <= 50]['distancia_km'].describe().round(2)
 
 ```
 
-## Parte 2: Dados categoricos
+## Parte 2: df categoricos
 
 ### 2.1 Análise exploratória das features categóricas
 O que fazer com as dimensionaidades ?? 
@@ -159,8 +174,15 @@ O que fazer com as dimensionaidades ??
 Verificar se uma estategia de pipeline de pre-processamento com uma regressão multinivel. 
 
 ## Parte 3: Imputação de Valores Ausentes
-2.1 Diagnóstico de valores ausentes
-Identificamos a quantidade e proporção de valores ausentes em cada coluna.
+
+### 3.1 Coluna corregulador
+
+Na descritiva dos df verificamos **112** valores ausentes para coluna corregulador e utilizamos a estratégia do dado mais frequente por ser df categóricos.
+
+```{python}
+mode_corregulador = df['corregulador'].mode()[0]
+df['corregulador'] = df['corregulador'].fillna(mode_corregulador)
+```
 
 
 ## Parte 4: Desbalanceamento de Classes
