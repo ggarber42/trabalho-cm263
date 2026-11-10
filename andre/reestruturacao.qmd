@@ -466,7 +466,7 @@ var_interesse <- c(
   # histórico por motivo
   "n_consultas_previas_motivo", "n_faltas_previas_motivo", "ultima_previa_mesmo_motivo",
   # unidades
-  "cnes_solicitante", "cnesexecutante",
+  "cnes_solicitante","unidadesolicitante", "cnesexecutante","unidadeexecutante",
   # censo
   "favela_comunidade", "taxa_alf_geral", "renda_media_winsor",
   "coordenadoria_saude", "distrito_sanitario"
@@ -495,11 +495,25 @@ sapply(gercon, function(x) class(x)[1])
 
 #### Salva o banco
 ```{r}
-write_parquet(gercon, here("dados/processados/gercon_poa_censo_reestrurado.parquet"))
+# write_parquet(gercon, here("dados/processados/gercon_poa_censo_reestrurado.parquet"))
 ```
 
 ## Analise exploratoria
 Vamos fazer uma analise exploratoria do banco de dados, para entender melhor as variaveis e suas caracteristicas. E possiveis processamentos que teramos que fazer antes da modelagem. 
+
+```{r}
+library(here)
+library(arrow)
+library(dplyr)
+library(stringr)
+library(readr)
+library(janitor)
+library(gt)
+library(lubridate)
+
+gercon<- read_parquet(here("dados/processados/gercon_poa_censo_reestrurado.parquet")) |> 
+    clean_names()
+```
 
 ### Variavel situacaoagenda
 
@@ -514,36 +528,173 @@ Variavel desbalanceada, com 83% de casos REALIZADA e 17% de casos FALTANTE.
 
 PROBLEMA que vamos ter que pensar. 
 
+### Variavel especialidademae
+```{r}
+gercon |> 
+    tabyl(especialidademae) |> 
+    janitor::adorn_pct_formatting() |> 
+    arrange(desc(n))
+```
+
+### Variavel cnesexecutante
+
+Quero fazer uma analise exploratoria da variavel cnesexecutante, que é a unidade de saude que realizou a consulta. Quero saber os mais frwquentes mas com frequencia acumulada.
+
+```{r}
+executante_frequencia <- gercon |>
+    group_by(cnesexecutante,unidadeexecutante) |>
+    summarise(n = n(), .groups = "drop") |>
+    arrange(desc(n)) |>
+    mutate(pct_acum = cumsum(n) / sum(n) * 100)
+
+executante_frequencia_23_26 <- gercon |> 
+    filter(year(datahora_consulta) >= 2023) |>
+    group_by(cnesexecutante,unidadeexecutante) |>
+    summarise(n = n(), .groups = "drop") |>
+    arrange(desc(n)) |>
+    mutate(pct_acum = cumsum(n) / sum(n) * 100)
+
+executantes_mais_faltantes <- gercon |>
+    filter(situacaoagenda == "FALTANTE") |>
+    group_by(cnesexecutante,unidadeexecutante) |>
+    summarise(n = n(), .groups = "drop") |>
+    arrange(desc(n)) |>
+    mutate(pct_acum = cumsum(n) / sum(n) * 100)
+
+```
+
+Verificar quais cnesexecutantes que aparecem todos os anos datahora_consulta.   
+
+```{r}
+anos_total <- gercon |>
+    mutate(ano = year(datahora_consulta)) |>
+    distinct(ano) |>
+    nrow()
+
+executante_todos_anos <- gercon |>
+    mutate(ano = year(datahora_consulta)) |>
+    group_by(cnesexecutante, unidadeexecutante) |>
+    summarise(n_anos = n_distinct(ano), .groups = "drop") |>
+    filter(n_anos == anos_total) |>
+    arrange(desc(n_anos))
+
+executante_todos_anos
+
+
+
+```
+
+
+# Endereços dos CNES ----
+```{r}
+est <- read_csv2(
+  here("tbEstabelecimento202609.csv"),
+  locale = locale(encoding = "ISO-8859-1"),
+  col_types = cols(.default = col_character())
+) |>
+  mutate(CO_CNES = str_pad(CO_CNES, width = 7, side = "left", pad = "0"))
+
+# Selecionar os cnesexeceutantes de gercon na lista de est. 
+
+est_filtrado<- gercon |>
+  distinct(cnesexecutante) |>
+  left_join(est, by = c("cnesexecutante" = "CO_CNES"))
+
+```
+
+```{r}
+# tbNaturezaJuridica202609.csv
+dicionario<- read_csv2(
+  here("tbNaturezaJuridica202609.csv"),
+  locale = locale(encoding = "ISO-8859-1"),
+  col_types = cols(.default = col_character())
+)
+
+# realizar merge de dicionario com est_filtrado, pela variavel CO_NATUREZA_JUR
+
+est_filtrado <- est_filtrado |>
+  select(-any_of("DS_NATUREZA_JUR")) |>
+  left_join(dicionario, by = "CO_NATUREZA_JUR")
+
+```
 
 
 ```{r}
-library(ggplot2) 
-library(gtsummary)
+# adiconar a coluna DS_NATUREZA_JUR, que é a descricao da natureza juridica do cnesexecutante, no banco executantes_mais_faltantes
+executantes_mais_faltantes <- executantes_mais_faltantes |>
+    left_join(est_filtrado, by = c("cnesexecutante" = "cnesexecutante"))   
+
+
+executantes_mais_faltantes |> 
+    left_join(est_filtrado, by = c("cnesexecutante" = "CO_CNES"))
+
+
 ```
 
-Variaveis numericas
+
 ```{r}
-bivariada_numericas<- gercon |>
-  tbl_summary(by = situacaoagenda, missing = "ifany",
-              statistic = list(all_continuous() ~ "{median} ({p25}, {p75})")) |>
-  add_overall() |> add_p() |> add_q(method="bonferroni") |> bold_labels()
+
+gercon<-gercon |> 
+    left_join(
+    est_filtrado |> select(cnesexecutante,DS_NATUREZA_JUR),
+    by = c("cnesexecutante" = "cnesexecutante")
+    )
+
+
+
+gercon |> 
+    select(cnesexecutante, unidadeexecutante, DS_NATUREZA_JUR,situacaoagenda) |> 
+    tabyl(DS_NATUREZA_JUR) |> 
+    adorn_pct_formatting() |> 
+    arrange(desc(n))
+
+```
+
+
+```{r}
+gercon |> 
+    select(unidadeexecutante, DS_NATUREZA_JUR) |>
+    filter(DS_NATUREZA_JUR=="EMPRESA PUBLICA") |> 
+    distinct(unidadeexecutante) |>
+    arrange(unidadeexecutante)
+
+```
+
+
+```{r}
+unidadesprefeitura<-gercon |> 
+    filter(DS_NATUREZA_JUR=="MUNICIPIO")
+```
+
+unidadesprefeitura
+
+
+```{r}
+dim(unidadesprefeitura)
 ```
 
 
 ```{r}
 
-d <- gercon |>
-  mutate(ano_consulta = factor(format(datahora_consulta, "%Y")),
-         mes_consulta = factor(months(datahora_consulta, abbreviate = TRUE),
-                               levels = unique(months(as.Date(paste0("2020-", 1:12, "-01")), TRUE))),
-         ano_solicitacao = factor(format(data_solicitacao, "%Y")),
-         mes_solicitacao = factor(months(data_solicitacao, TRUE), levels = levels(mes_consulta)))
+summary(unidadesprefeitura)
 
-d |> count(ano_consulta, mes_consulta, situacaoagenda) |>
-  group_by(ano_consulta, mes_consulta) |> mutate(pf = n[situacaoagenda=="FALTANTE"]/sum(n)) |>
-  filter(situacaoagenda=="FALTANTE") |>
-  ggplot(aes(mes_consulta, pf, group = ano_consulta, color = ano_consulta)) + geom_line() +
-  scale_y_continuous(labels = scales::percent)
+unidadesprefeitura |> 
+    tabyl(situacaoagenda) |> 
+    adorn_pct_formatting() |> 
+    arrange(desc(n))
+
 ```
 
 
+```{r}
+# write_parquet(unidadesprefeitura, here("dados/processados/gercon_poa_censo_reestrurado_unidadesprefeitura.parquet"))
+```
+
+# exploratoria
+
+quero realizar uma analise de serie temporal para o gercon, para ver se existe algum padrao de faltas ao longo do tempo.
+
+
+```{r}
+glimpse(gercon)
+```
