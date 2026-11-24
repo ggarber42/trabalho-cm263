@@ -1,0 +1,74 @@
+# =============================================================================
+# config.yaml — todos os parâmetros do pipeline v2 (previsão semanal de faltas)
+# Caminhos são relativos à pasta deste arquivo.
+# Decisões de origem: ../DECISOES_REDESENHO_2026-11-22.md (D1–D14)
+# =============================================================================
+
+dados:
+  # CSV unificado do GERCON (dados abertos), separador ';', UTF-8 com BOM
+  gercon: dados/brutos/gercon_solicitacoes_executante_porto_alegre_2018_2026.csv
+  # Cadastro CNES (competência 09/2026), só para o filtro municipal
+  cnes_estabelecimentos: dados/brutos/tbEstabelecimento202609.csv
+  cnes_natureza_juridica: dados/brutos/tbNaturezaJuridica202609.csv
+
+saidas: saidas            # cada perfil grava em saidas/<perfil>/
+
+selecao:
+  municipiosolicitante: PORTO ALEGRE
+  tipounidade: CENTRO DE SAUDE/UNIDADE BASICA
+  complexidade: MEDIA
+  situacoes_desfecho: [REALIZADA, FALTANTE]
+  # DECISÃO (D2): CNES municipal = natureza Município ou Fundação municipal E gestor 431490
+  # E razão social na lista abaixo. Reproduz o recorte antigo (flag_municipal.csv: 111 CNES).
+  # Sem a exigência de razão social entrariam 8 CNES "HOSPITAL NOSSA SENHORA DA CONCEICAO"
+  # (GHC, federal) e o "HOSPITAL DE PRONTO SOCORRO" — a confirmar com o usuário.
+  naturezas_municipais: ["1244", "1155", "1279"]   # MUNICIPIO, FUNDACAO MUNICIPAL, FUNDACAO PUBLICA DE DIREITO PRIVADO MUNICIPAL
+  municipio_gestor: "431490"
+  razoes_sociais: ["PREFEITURA MUNICIPAL DE PORTO ALEGRE", "MUNICIPIO DE PORTO ALEGRE",
+                   "HOSPITAL MATERNO INFANTIL PRESIDENTE VARGAS", "PRONTO ATENDIMENTO CRUZEIRO DO SUL"]
+
+periodo:
+  inicio_historico: "2018-01-01"
+  inicio_analise: "2019-04-01"      # DECISÃO (D4): mudança de patamar em 2019-04
+  fim_analise: "2024-12-29"         # DECISÃO (D4): última semana completa antes da extração de 07/01/2025
+
+avaliacao:
+  horizontes: [2, 1]                 # semanas (D8)
+  horizonte_principal: 2             # DECISÃO (22/11/2026): previsão entregue na segunda para a semana seguinte
+  testes:                            # ano de teste -> fim do treino
+    - {ano: 2024, fim_treino: "2023-12-31", principal: true}
+    # DECISÃO (22/11/2026): teste de sensibilidade em 2023 removido para reduzir o tempo de
+    # modelagem; "avaliação em um único ano" entra como limitação.
+  # DECISÃO (D17, usuário 22/11/2026): nenhuma CNES recebe tratamento separado (inclusive o
+  # Materno Infantil); todas seguem o critério de consistência abaixo.
+  cnes_relatar_a_parte: []
+  nivel_confianca: 0.95              # DECISÃO: IC95%; significativo se p_holm < 0,05
+  bootstrap_reamostragens: 2000
+  bootstrap_bloco_semanas: 4
+
+exploratoria:
+  # DECISÃO (D10): regra declarada antes de rodar (Cerqueira, Torgo e Mozetič 2020)
+  limiar_maioria_nao_estacionaria: 0.5
+  alfa: 0.05                         # com correção de Benjamini-Hochberg entre séries
+  # DECISÃO (D17): estrato "consistentes" = CNES ativa (≥ 1 consulta) em ≥ min_semanas_ativas das
+  # últimas janela_semanas do treino E com ≥ min_faltas_semana faltas por semana em média nessa
+  # janela; as demais formam o estrato "outros". Calculado só com o treino.
+  consistencia: {janela_semanas: 104, min_semanas_ativas: 94, min_faltas_semana: 2}
+  min_semanas_ativas_modelo_local: 104   # DECISÃO: 2 anos de dados para ETS/SARIMA locais
+  corte_adi: 1.32                    # Syntetos, Boylan e Croston (2005)
+  corte_cv2: 0.49
+
+tuning:
+  semente: 20261122
+  n_configuracoes: 8                 # DECISÃO: mesmo orçamento para todo modelo ajustável
+  n_jobs: -1                         # núcleos para os modelos locais (-1 = todos)
+  rep_holdout: {n_repeticoes: 5, semanas_validacao: 26, fracao_minima_treino: 0.5}
+  cv_bloqueada: {n_blocos: 5, folga_semanas: 4}
+
+variaveis:
+  te_suavizacao_m: 20                # DECISÃO (D13): peso da taxa geral no target encoding
+  te_colunas: [cnes_solicitante, especialidade]
+  baseline_janela: 4                 # DECISÃO (D11)
+  taxa_suavizacao_m: 50              # DECISÃO (D15, revisto em D18): peso (em consultas) da taxa de 13 semanas na de 4
+  lags_y: 4
+  fourier_k: 2                       # termos de Fourier para sazonalidade anual (52,18 semanas)

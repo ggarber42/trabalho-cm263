@@ -1,0 +1,17 @@
+{
+  "etapa": "S3_1_horizonte_municipal",
+  "gerado_em": "2026-11-16T23:21:17",
+  "python": "3.12.3",
+  "sistema": "Linux-6.17.0-35-generic-x86_64-with-glibc2.39",
+  "entradas": {
+    "/home/andrebueno/Google_drive/01_Doutorado/Tese/banco/serie_temporal/gercon_poa_censo_distancias_com_natureza_juridica.parquet": "8e78fa959fc7406a1bfb1e888b441e81a0f95fd0fa9d17b78101d50162a617c6"
+  },
+  "saidas": {
+    "/home/andrebueno/Google_drive/01_Doutorado/Tese/banco/serie_temporal/tabelas/antecedencia_agendamento_municipal.csv": "1b37e49c21e52df9f88f52ce804b4c2b087b1b118cbde8e85b7173d29edc167b",
+    "/home/andrebueno/Google_drive/01_Doutorado/Tese/banco/serie_temporal/tabelas/agenda_conhecida_por_h_municipal.csv": "99752992d8366ec6bbafbde72309b6b5e2434cffc12eea1cf962123810c478a9",
+    "/home/andrebueno/Google_drive/01_Doutorado/Tese/banco/serie_temporal/tabelas/acf_taxa_diaria_municipal.csv": "db7394cc86e097a2b4952c4aee8ef70ee2230f210cece56b226cf58aa8cc1645",
+    "/home/andrebueno/Google_drive/01_Doutorado/Tese/banco/serie_temporal/tabelas/atraso_registro.csv": "40aeb48cf9896b9b4227ab37dbf7367594b2b9ce982a773b633dafd9cfee93ba",
+    "/home/andrebueno/Google_drive/01_Doutorado/Tese/banco/serie_temporal/entregaveis/justificativa_horizonte.md": "5fbdef8beffa8b84f55ae8e346afb993edd6a1b99b700436887ff57cc7b80ba2"
+  },
+  "extra": {}
+}

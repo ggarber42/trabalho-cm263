@@ -1,0 +1,41 @@
+{
+  "etapa": "S13_tabelas_figuras_municipal_smoke",
+  "gerado_em": "2026-11-24T17:49:53",
+  "python": "3.12.16",
+  "sistema": "Linux-6.8.0-149-generic-x86_64-with-glibc2.35",
+  "entradas": {
+    "/home/guilhermegarber/trabalho-cm263/tabelas/res_municipal_smoke_principal_metricas.csv": "2fcb34f732145e4e6e944455988ad0597a876d158cc8e5c10bb20d74eadb5f78"
+  },
+  "saidas": {
+    "/home/guilhermegarber/trabalho-cm263/tabelas/md/smoke/principal_metricas.md": "c9bb6dcb1aedccd31b53b46042b1189e5657ab175f612ce78adbe111bd8f7b94",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/md/smoke/principal_dm.md": "3ef0b1e3dc07be5c4753b4b1062e24b9b18646ebc5c79fdd2d2da8ecc56125e9",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/md/smoke/subgrupos_wape.md": "95d719cf526cc190b629d4e0066f6ef2b128281e09032e731b735e0f27eee16e",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/md/smoke/esquemas.md": "970e65afe652ff9fd09c4c2f036469054aab415a49e945b7eaf999301ee72e00",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/md/smoke/defasagens.md": "d8911d0fd7cf20723531e7a3fed9535c9f9eb445889e02e2795712a1a796c5c3",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/md/smoke/modos_agenda.md": "11f3bd5ef3059a9e8d91fbea5b37ec7eaf6f48d09bf09a86e5da17f9195cff34",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/md/smoke/coorte_por_corte_municipal.md": "e83e4785bc58ca2bd3511032c411ada4c6f4a326f4f61fabd10b004d7c16dd66",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/md/smoke/fluxograma_selecao.md": "8cbf84d69a30478565ed31db3f26c56d1d34587fc156115135d3288a7f9ebbf8",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/md/smoke/reproducao_baseline.md": "aa8d7e077ac207bb2412f721ea043ea169f1ce548e10eddc55d176126a05cd51",
+    "/home/guilhermegarber/trabalho-cm263/figuras/smoke/fluxograma_selecao.png": "524e633d101b12ba0d858c576f86a2d3b1876a5dfb5e946775b7a375a5e3c5ac",
+    "/home/guilhermegarber/trabalho-cm263/figuras/smoke/fluxograma_selecao.pdf": "be3b931e299353236cec5dd9b7a46b149de8a6fa67c007f42289239ef3745e85",
+    "/home/guilhermegarber/trabalho-cm263/figuras/smoke/ganho_wape_vs_baseline.png": "7878c5c54dcb948d678335e7a10ca4b01a3f3605eef40553f8c15009e1b9f1f5",
+    "/home/guilhermegarber/trabalho-cm263/figuras/smoke/ganho_wape_vs_baseline.pdf": "28793c71954ff7eceea6379858e6864a25fe2ec841ec71383c3fb886b0a5ddc5",
+    "/home/guilhermegarber/trabalho-cm263/figuras/smoke/desempenho_vs_horizonte.png": "2a9abba445ed9299d5d2fd26e8c870a1b69764bf9127e65f95b489e77f2cca8f",
+    "/home/guilhermegarber/trabalho-cm263/figuras/smoke/desempenho_vs_horizonte.pdf": "535bb7ad9edee79676528e321e56a1feb2da7407db0f539ff6e362de1b81aacc",
+    "/home/guilhermegarber/trabalho-cm263/figuras/smoke/calibracao_cobertura.png": "bd19b28b23f990518ef8b171d6933945bdedd305f83d32ba4d2076c33f491edf",
+    "/home/guilhermegarber/trabalho-cm263/figuras/smoke/calibracao_cobertura.pdf": "3f3156da18f34ccb3ae2d53db4401d53101b44e6ff05cb40926d0bd74c110fe9",
+    "/home/guilhermegarber/trabalho-cm263/figuras/smoke/comparacao_esquemas.png": "61b33f5dd5a8396ba3544f5753524a10ebe1c6a45332a9159436371f5c78700a",
+    "/home/guilhermegarber/trabalho-cm263/figuras/smoke/comparacao_esquemas.pdf": "da0f1c39b69a2484b2c7a1d6c91efab5e4b306dba0a32b91b53b32d0ddab838d",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/md/smoke/importancia_grupos.md": "6c90466964533d623ea9f121ff1ede8737e91eb608e2172f2706a2b70a8fadc6",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/md/smoke/importancia_estabilidade.md": "62b05742103434e557a99dd6ddfcef33c0d06e0bae68fc26e22bc7221ad2980d",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/md/smoke/overbooking.md": "2f99aba13595b417ab57a2a99f7f9a8f9327c77cb879fe1c047cd9410618a91d",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/md/smoke/sensibilidade.md": "fc177ec44369a6eb3ed0ca4042121868fcc2430a076bd1da1b6c3ef92afc3769",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/md/smoke/sensibilidade_ranking.md": "cc2625908a7e148fbc616bfe9c1b29aae4ae8e2468219b6b73740dc50c1d2234",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/md/smoke/sensibilidade_sementes.md": "3814db97a0f8f5e7503ead3870f5a30e0fe1a598a005e6f90bbc7ad8d74aa386",
+    "/home/guilhermegarber/trabalho-cm263/figuras/smoke/importancia_grupos.png": "9b4eed44c5034b54fd8f1bb5a4a4d1573140e040b0a4320b3facb8a7278b8506",
+    "/home/guilhermegarber/trabalho-cm263/figuras/smoke/importancia_grupos.pdf": "f72cb0b23ebaf351e8756b8060e3b6b550e86894414221ebee7d7f51be62cc14",
+    "/home/guilhermegarber/trabalho-cm263/figuras/smoke/overbooking_beneficio.png": "63b3d233e9e698c37d4915202900766cf0c11806afeeb88b6dda1535f45a8d1e",
+    "/home/guilhermegarber/trabalho-cm263/figuras/smoke/overbooking_beneficio.pdf": "16478287e8d376c8e826806b353249af30a25ed4a6d99d7aaf65c610cfbf8e69"
+  },
+  "extra": {}
+}

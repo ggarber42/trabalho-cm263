@@ -1,0 +1,92 @@
+{
+  "etapa": "ingestao_perfil_completo_draco3",
+  "gerado_em": "2026-11-20T10:54:34",
+  "origem": "pcad-resultados.zip (execução draco3, job 838448, início 2026-11-17 16:57, fim 20:39)",
+  "observacao": "Commit do código que gerou a execução não está registrado no zip; confirmar com quem rodou.",
+  "arquivos": {
+    "logs/draco3_838448.err": {
+      "sha256": "b0b497548b1d097460f1ef26b2a2adfd8b627e159d4e6e0d9488c78598e461a6",
+      "bytes": 25935
+    },
+    "logs/draco3_838448.out": {
+      "sha256": "40951a8dc46fd233c88b467650f8f54a23b74b19b63c9d8bccf69b5c7b578670",
+      "bytes": 29919
+    },
+    "pcad-resultados.zip": {
+      "sha256": "354d951ec15e4b802b88b5a189ff80701d1fee0c121c6b2dfc2e0c2a3ae71eff",
+      "bytes": 22933509
+    },
+    "resultados/municipal_completo/experimentos.csv": {
+      "sha256": "3a30a6a17cbfbabbfa1e6d512d530daafabb28c03f2c23f85804ecfd699b53f2",
+      "bytes": 121470
+    },
+    "tabelas/importancia_municipal_completo.csv": {
+      "sha256": "53b980ada7f0842e8349bba0a8b47ace1a87c23a46d6d997ad3247442eb42a7d",
+      "bytes": 25895
+    },
+    "tabelas/importancia_municipal_completo_estabilidade.csv": {
+      "sha256": "8a92199f059420440cdbe9950c7fbf4eb1945cf784e53bf5160f2bff60e332aa",
+      "bytes": 1016
+    },
+    "tabelas/importancia_municipal_completo_grupos.csv": {
+      "sha256": "f967d5543613bacea987fb225f09e53526f259b04d0105e9d6161f346db0391a",
+      "bytes": 5391
+    },
+    "tabelas/overbooking_municipal_completo.csv": {
+      "sha256": "acdd501d6f1d68302c902543cbd692d8ba9aa0e9691e85ff6b61c03e47a32271",
+      "bytes": 4119
+    },
+    "tabelas/overbooking_municipal_completo_curva.csv": {
+      "sha256": "6cf494a4371a2dd0b3b0adb50deeafcd9a15cd5c7e6809e0dfe3b558b32a1cdb",
+      "bytes": 19509
+    },
+    "tabelas/overbooking_municipal_completo_por_cnes.csv": {
+      "sha256": "0b13c80a96fc3853d7eba278f8cf0990ef1e6564f20fc465e2be4cbf46930295",
+      "bytes": 43685
+    },
+    "tabelas/res_municipal_completo_defasagens.csv": {
+      "sha256": "f0e0c479be367166f74ea5d53f388b75ee5c326e01a98aab5468aeb339b0b13f",
+      "bytes": 6503
+    },
+    "tabelas/res_municipal_completo_esquemas_teste_comum.csv": {
+      "sha256": "8be844e8615964a257c01f605d11b59b4dcda4788985320e5bc00acb632745ce",
+      "bytes": 17453
+    },
+    "tabelas/res_municipal_completo_linhas_perdidas.csv": {
+      "sha256": "773455668550fb56b6e9d1dcebad2049a7b562b89ba0b2da902001041f00dee1",
+      "bytes": 9045
+    },
+    "tabelas/res_municipal_completo_modos_agenda.csv": {
+      "sha256": "e3099e024a10780a4594440fc739df57319b5af8f0984946dc0adfec1c9f7df4",
+      "bytes": 5728
+    },
+    "tabelas/res_municipal_completo_paciente_metricas_consulta.csv": {
+      "sha256": "2bed2af11db766a9088dd7ab9d70098eed8a1557fe32fe0e9fcce7af76139d89",
+      "bytes": 315
+    },
+    "tabelas/res_municipal_completo_principal_dm.csv": {
+      "sha256": "99b840ce95798ee05dcc5e4f433555434aa0b9bbfa755fef356368c1a1efae1a",
+      "bytes": 8178
+    },
+    "tabelas/res_municipal_completo_principal_metricas.csv": {
+      "sha256": "a73b84de3aeada8f72cfbfcb880fea1ee51bc8b4a83b2b2d2d25563b1357244e",
+      "bytes": 3185
+    },
+    "tabelas/res_municipal_completo_principal_subgrupos.csv": {
+      "sha256": "69a2c150c524745ed270d170c18f8a0bb670f1970f50fde8bb8633600179883a",
+      "bytes": 23538
+    },
+    "tabelas/sensibilidade_municipal_completo.csv": {
+      "sha256": "5d69952fb66fb81c84d51bff44c7e0ee725559aa7074f0657186d73bafee843a",
+      "bytes": 17410
+    },
+    "tabelas/sensibilidade_municipal_completo_ranking.csv": {
+      "sha256": "4d113bebe0bc945d479a6b62a9d14037f99f8bf5ee6d07747b22a8d22eb38287",
+      "bytes": 591
+    },
+    "tabelas/sensibilidade_municipal_completo_sementes.csv": {
+      "sha256": "6cf7b6eb103eab819068ae6cf6f50eca06fc9c5aaeca3c2ab530cdcf798ebc3a",
+      "bytes": 575
+    }
+  }
+}

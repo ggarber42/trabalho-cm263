@@ -1,0 +1,5 @@
+ordenacao,hit@1,recall@3,cnes_dias_com_falta
+V1 por paciente (agregado),0.8619,0.8496,12126
+base: taxa 28d da especialidade,0.8432,0.8353,12126
+base: total do dia x fatia da agenda,0.8282,0.8271,12126
+referencia: maior agenda,0.8283,0.8271,12126

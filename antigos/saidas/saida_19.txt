@@ -1,0 +1,20 @@
+MUNICIPAIS 2019-01 a 2026-03 | 110 CNES com consulta no periodo (de 111 municipais) | 343523 consultas | 76182 faltas
+  presentes nos 8 anos                  47 CNES | 86.9% consultas | 86.7% faltas
+  + >=100 consultas/ano (2019-25)       14 CNES | 74.8% consultas | 75.5% faltas
+  + ativo >=90% das semanas = COORTE    10 CNES | 71.5% consultas | 72.9% faltas
+
+COORTE MUNICIPAL: 10 CNES | sem quebra: 6 | so pandemia: 1 | com quebra fora da pandemia: 3
+         faltas  n_quebras                            regimes
+cnes                                                         
+2237385   12063          1  19-01>21-11:17% | 21-12>26-03:23%
+9132562    9944          1  19-01>22-07:20% | 22-08>26-03:26%
+2237334    9181          1  19-01>21-01:17% | 21-02>26-03:24%
+8006881    5934          0                    19-01>26-03:22%
+7031092    4199          1  19-01>24-12:37% | 25-01>26-03:26%
+7031076    3952          0                    19-01>26-03:30%
+6883206    3940          0                    19-01>26-03:31%
+7214448    3733          0                    19-01>26-03:27%
+2237822    1462          0                    19-01>26-03: 7%
+7210280    1162          0                    19-01>26-03:22%
+
+salvo: coorte_municipal_2019_2026.csv

@@ -1,0 +1,148 @@
+# config.yaml — ÚNICA fonte de parâmetros do pipeline (CLAUDE.md seção 6).
+# Todos os caminhos são relativos à pasta do projeto (onde está este arquivo).
+# G2 CONGELADO em 17/11/2026 (ver entregaveis/plano_analise.md). Não alterar sem registrar e justificar.
+
+projeto: absenteismo_gercon_poa
+disciplina: CMP263 - Aprendizagem de Maquina
+prazo_entrega: null            # PENDENTE: registrar data e formato da entrega da disciplina
+
+# DECISÃO: semente-mestra única; as demais derivam dela. Nenhum random_state=None.
+semente: 20261116
+sementes_repeticao: [0, 1, 2, 3, 4]   # repetições de modelos estocásticos (PIPELINE.md seção 4)
+
+dados:
+  # DECISÃO: por enquanto o parquet continua na raiz da pasta, porque os scripts legados 19-24
+  # e utils_municipal.py o leem de lá. Quando eles forem migrados, mover para dados/brutos/.
+  base: gercon_poa_censo_distancias_com_natureza_juridica.parquet
+  estabelecimentos: gercon_poa_censo_estabelecimentos.parquet
+  flag_municipal: flag_municipal.csv
+  niveis_municipal: niveis_municipal.csv
+  desfecho: {coluna: situacaoagenda, positivo: FALTANTE}
+  # Primeiro e último dia de consulta esperados. DECISÃO (16/11/2026): 2018 é MANTIDO
+  # (alimenta o histórico do paciente), apesar da cobertura parcial.
+  periodo_esperado: ["2018-01-01", "2026-03-31"]
+  dicionario_manual: dados/dicionario_manual.csv   # grupo e momento de disponibilidade por variável
+
+# DECISÃO (16/11/2026): nenhuma exclusão de CNES por inatividade, volume mínimo ou placeholder.
+# A classificação de atividade é só descritiva (tabelas/atividade_cnes.csv).
+exclusoes_cnes: nenhuma
+
+escopo: municipal              # municipal | geral | criterio_x  (decisão em aberto, CLAUDE.md seção 2)
+
+# Coorte e níveis A/B/C: mesmos limiares dos scripts legados 10/19/20, mas calculados só com dados
+# ANTES do corte de cada ano de teste (src/coorte.py).
+coorte:
+  por_corte: true
+  inicio: "2019-01-01"         # DECISÃO: 2018 tem cobertura parcial; fica fora da coorte e dos níveis (mas no treino)
+  min_consultas_ano: 100       # em cada ano completo da janela (legado: >=100/ano em 2019-2025)
+  min_semanas_ativas: 0.90     # fração de semanas completas com alguma consulta
+  G_min: 100                   # razão de verossimilhança binomial para aceitar quebra de regime
+  dif_min_pp: 0.05             # diferença mínima de taxa entre segmentos (5 p.p.)
+  min_meses_segmento: 6
+  taxa_min_ultimo_regime: 0.05 # abaixo disso, nível C (provável artefato de registro)
+
+lag: [3, 14]                   # DECISÃO (17/11/2026, usuário): dois cenários — L=3 (operacional) e L=14 (agenda conhecida: ~56% da final)
+lag_principal: 3               # CONGELADO em G2 (17/11/2026): L=3, caso operacional; L=14 roda completo como sensibilidade
+
+divisao:
+  principal: expansiva         # CONGELADO em G2 (17/11/2026); demais esquemas = sensibilidade, comparados no teste_comum
+  esquemas: [holdout, expansiva, deslizante, purged_embargo]
+  holdout: {corte: "2023-01-01"}
+  deslizante: {janelas_meses: [12, 24, 36]}
+  purged_embargo: {purga_dias: [0, 28, 90], embargo_dias: [0, 7]}
+  teste_comum: ["2024-01-01", "2026-03-31"]
+  anos_teste: [2023, 2024, 2025, 2026]
+
+# Modelos implementados em src/models (os marcados "opcional" só entram se a biblioteca estiver instalada).
+# naive, baseline_poisson: referências sem ajuste. hgb_poisson, rf, poisson_reg, lightgbm (opcional): séries CNES-dia.
+# paciente_hgb: HGB por paciente somado por CNES-dia. SARIMA/ETS: não portados nesta versão (ver PROGRESSO).
+modelos: [naive, baseline_poisson, ets, sarima, sarimax, glm_nb, poisson_reg, hgb_poisson, hgb_poisson_k, rf, lightgbm, xgboost, catboost, mlp, paciente_hgb]
+
+# DECISÃO: demais fatores do estudo. agenda_modo=conhecida CONGELADO em G2 (17/11/2026); `final` = sensibilidade.
+agenda_modo: conhecida         # conhecida (agenda existente em t-L, reescalada por k_h do treino) | final (agenda do dia)
+atraso_d: 0                    # d: atraso de registro do desfecho (premissa; a base não tem o campo)
+
+tuning:
+  n_configs: 24                # mesmo orçamento para todos os modelos ajustáveis (grades menores usam a grade inteira)
+  folds_internos: [-2, -1]
+  criterio_serie: wape         # modelos de série: WAPE pooled nos folds internos
+  criterio_paciente: brier     # modelos por paciente: Brier por consulta nos folds internos
+  janelas_meses: [12, 24, 36]  # esquema deslizante: janela escolhida como hiperparâmetro (folds internos)
+avaliacao: {primaria: [wape, crps], correcao: holm, ks: [1, 2, 3, 5, 8], bootstrap: 2000}
+
+# Variantes de esquema de divisão (referenciadas pelos blocos de experimento).
+variantes_esquema:
+  expansiva: {esquema: expansiva}
+  holdout: {esquema: holdout}
+  deslizante: {esquema: deslizante}
+  purged_P0: {esquema: purged_embargo, P: 0, E: 0}
+  purged_P28: {esquema: purged_embargo, P: 28, E: 7}
+  purged_P90: {esquema: purged_embargo, P: 90, E: 7}
+
+# Variáveis do modelo por paciente. DECISÃO: as 32 candidatas MENOS `status` e `possuiunidadeindicada`
+# (momento de disponibilidade não confirmado). A poda 32->6 (script 21) é só hipótese e NÃO é usada aqui.
+paciente:
+  numericas: [idade, n_consultas_previas, n_faltas_previas, taxa_falta_prev, primeira_vez,
+              n_consultas_previas_especialidademae, n_faltas_previas_especialidademae,
+              n_consultas_previas_motivo, n_faltas_previas_motivo, dias_ate_consulta,
+              favela_comunidade, taxa_alf_geral, renda_media_winsor, distancia_km, tempo_caminhando,
+              distancia_km_trans_publico, tempo_desloc_trans_publico, quant_bus, baldiacoes]
+  categoricas: [falta_recente, ultima_previa_mesma_especialidademae, ultima_previa_mesmo_motivo, especialidademae,
+                cid_1dig, dia_semana, mes_consulta, corregulador, coordenadoria_saude, distrito_sanitario,
+                cnesexecutante]
+
+# Estrato tratado à parte nos resultados (taxa de falta ~7%, distinto das demais; lista em dados, não no código).
+estratos: {materno_infantil: ['2237822']}
+
+# Perfil ativo: variável de ambiente PERFIL ou "perfil" abaixo. Cada perfil sobrescreve (merge profundo) o resto.
+perfil: smoke
+perfis:
+  smoke:
+    usa_amostra: true          # CNES de smoke.cnes (todas as CNES da amostra entram no treino)
+    tuning: {n_configs: 3}
+    avaliacao: {bootstrap: 300}
+    experimento:
+      n_jobs: 4         # DECISÃO: 4 processos no smoke (resultado idêntico ao sequencial: sementes derivadas por unidade)
+      blocos:
+        - {nome: principal, variantes: [expansiva], lags: [3, 14], modos: [conhecida, final],
+           modelos: [naive, baseline_poisson, ets, glm_nb, poisson_reg, hgb_poisson, hgb_poisson_k, rf, lightgbm, xgboost,
+                     catboost, mlp, paciente_hgb]}
+        - {nome: estatisticos, variantes: [holdout], lags: [3, 14], modos: [conhecida], modelos: [sarima, sarimax]}
+        - {nome: esquemas, variantes: [holdout, deslizante, purged_P28], lags: [3, 14], modos: [conhecida],
+           modelos: [baseline_poisson, hgb_poisson, poisson_reg]}
+  completo:
+    usa_amostra: false         # todas as CNES do escopo
+    tuning: {n_configs: 24}
+    experimento:
+      n_jobs: null             # null = nº de núcleos - 1
+      blocos:
+        - {nome: principal, variantes: [expansiva], lags: [3, 14], modos: [conhecida, final],
+           modelos: [naive, baseline_poisson, ets, glm_nb, poisson_reg, hgb_poisson, hgb_poisson_k, rf, lightgbm, xgboost,
+                     catboost, mlp, paciente_hgb]}
+        # DECISÃO: SARIMA/SARIMAX só no modo "conhecida" (o modo só muda a exposição; o ajuste é o mais caro do estudo)
+        - {nome: estatisticos, variantes: [expansiva], lags: [3, 14], modos: [conhecida], modelos: [sarima, sarimax]}
+        - {nome: esquemas, variantes: [holdout, deslizante, purged_P0, purged_P28, purged_P90], lags: [3, 14], modos: [conhecida],
+           modelos: [naive, baseline_poisson, ets, glm_nb, poisson_reg, hgb_poisson, hgb_poisson_k, rf, lightgbm, xgboost,
+                     catboost, mlp, paciente_hgb]}
+
+# Amostra do teste de fumaça (make smoke). A lista de CNES é definida no M1.
+smoke:
+  fracao_pacientes: 0.05       # DECISÃO: no M0 amostra pacientes inteiros (preserva o histórico) para cobrir todos os anos
+  # DECISÃO (M1): CNES que estão na coorte municipal em TODOS os cortes (2023-2026), escolhidas por regra
+  # objetiva (tabelas/coorte_por_corte_municipal.csv): maior volume nível A em todos os cortes (8006881 Murialdo),
+  # maior volume nível B em todos os cortes (2237334 Santa Marta), menor volume nível A (7210280 SAE Santa Marta)
+  # e o estrato Materno Infantil (2237822, taxa ~7%), para exercitar o caminho "sem Materno Infantil".
+  # Todas têm consultas em 2019-2026. PENDENTE de aprovação do usuário.
+  cnes: ["8006881", "2237334", "7210280", "2237822"]
+
+saidas:
+  raiz: resultados
+  legado_municipal: antigos/resultados_municipal
+  experimentos: resultados/experimentos.csv
+  tabelas: tabelas
+  figuras: figuras
+  logs: logs
+  manifestos: manifestos
+
+# PARALELISMO: número de núcleos usado pelos joblib; null = todos menos 1.
+paralelismo: {n_jobs: null}

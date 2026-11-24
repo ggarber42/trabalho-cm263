@@ -1,0 +1,25 @@
+{
+  "python": "3.12.3",
+  "executavel": "/home/andrebueno/.venvs/absenteismo/bin/python",
+  "sistema": "Linux-6.17.0-35-generic-x86_64-with-glibc2.39",
+  "nucleos": 12,
+  "ram_gb": 15.5,
+  "pacotes": {
+    "numpy": "2.5.1",
+    "pandas": "3.0.5",
+    "pyarrow": "24.0.0",
+    "scipy": "1.18.0",
+    "scikit-learn": "1.9.0",
+    "statsmodels": "0.15.0",
+    "matplotlib": "3.11.2",
+    "PyYAML": "6.0.3",
+    "joblib": "1.5.3",
+    "threadpoolctl": "3.6.0",
+    "python-dateutil": "2.9.0.post0",
+    "pytest": "9.1.1",
+    "lightgbm": "4.7.0",
+    "xgboost": "3.4.1",
+    "catboost": "1.2.10"
+  },
+  "pacotes_faltando": []
+}

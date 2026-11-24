@@ -1,0 +1,5 @@
+# Bibliotecas OPCIONAIS dos modelos extras. `make venv` instala; rode `make lock` depois para fixar as versões.
+# Sem elas o pipeline roda do mesmo jeito: o modelo da biblioteca ausente é pulado com um aviso.
+lightgbm
+xgboost
+catboost

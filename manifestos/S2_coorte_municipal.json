@@ -1,0 +1,22 @@
+{
+  "etapa": "S2_coorte_municipal",
+  "gerado_em": "2026-11-24T17:46:39",
+  "python": "3.12.16",
+  "sistema": "Linux-6.8.0-149-generic-x86_64-with-glibc2.35",
+  "entradas": {
+    "/home/guilhermegarber/trabalho-cm263/gercon_poa_censo_distancias_com_natureza_juridica.parquet": "8e78fa959fc7406a1bfb1e888b441e81a0f95fd0fa9d17b78101d50162a617c6"
+  },
+  "saidas": {
+    "/home/guilhermegarber/trabalho-cm263/dados/derivados/coorte_municipal_corte_2023.csv": "49aa0d1b86e20830050dbea6f7fadad9d6b1ea7fcb64b30c07a2a96e5629fc58",
+    "/home/guilhermegarber/trabalho-cm263/dados/derivados/coorte_municipal_corte_2024.csv": "137845683ae6d4ad5f8dc07eae7e776ad58948df6c4c9b3e4ccb987861658e97",
+    "/home/guilhermegarber/trabalho-cm263/dados/derivados/coorte_municipal_corte_2025.csv": "8e5e5d708d1e678f5406672a8241f890edad9169893b100a5927c1ed760f6364",
+    "/home/guilhermegarber/trabalho-cm263/dados/derivados/coorte_municipal_corte_2026.csv": "f83068ccf23b8bc6cf9fa358f87db681f8f2739513ba2c040602918bcad3fea5",
+    "/home/guilhermegarber/trabalho-cm263/dados/derivados/coorte_municipal_global.csv": "5e1cea15596575db19ce234b5f7812eeec240b7021183ad2e6e4fa925037937e",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/coorte_conferencia_legado_municipal.csv": "680a3181583f3cf0ace5500e61c8d9c7128bf720243e2083dcadb3247523b917",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/coorte_por_corte_municipal.csv": "ef0962ad555094e746f7399f87ba67e009842ea7a9d49d54f134c7c25b2407fa",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/coorte_comparacao_global_municipal.csv": "9e842edfce423c1bc09953d9c891acb933663a60efb7bb2e8d7a6e4b26236ad1"
+  },
+  "extra": {
+    "escopo": "municipal"
+  }
+}

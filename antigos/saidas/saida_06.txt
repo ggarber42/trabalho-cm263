@@ -1,0 +1,64 @@
+sklearn 1.9.0 | linhas 983875 | features 32
+  2023: treino 485435 | teste 160899 | iter 218 | 14s
+  2024: treino 646334 | teste 150937 | iter 300 | 34s
+  2025: treino 797271 | teste 143119 | iter 300 | 58s
+  2026: treino 940390 | teste 43485 | iter 300 | 84s
+
+POR PACIENTE (teste 2023-2026)
+todas as CNES                      n= 498440  AUC=0.695  logloss=0.4350 (const 0.4478)  Brier=0.1344  y_medio=0.165  p_medio=0.183
+top 20 CNES                        n= 369467  AUC=0.678  logloss=0.4607 (const 0.4619)  Brier=0.1433  y_medio=0.174  p_medio=0.197
+top 20, so t0 = 14 dias (realista) n= 233689  AUC=0.678  logloss=0.4634 (const 0.4656)  Brier=0.1443  y_medio=0.176  p_medio=0.198
+top 20, t0 < 14 dias               n= 135601  AUC=0.677  logloss=0.4563 (const 0.4558)  Brier=0.1418  y_medio=0.170  p_medio=0.197
+
+IMPORTANCIA (queda de AUC ao embaralhar), modelo 2025:
+cnesexecutante                          0.0536
+especialidademae                        0.0345
+idade                                   0.0244
+taxa_falta_prev                         0.0145
+corregulador                            0.0085
+dias_ate_consulta                       0.0081
+cid_1dig                                0.0065
+ultima_previa_mesma_especialidademae    0.0020
+possuiunidadeindicada                   0.0016
+n_consultas_previas                     0.0016
+
+CNES-DIA (top 20): n=14964 | faltas/dia media=4.06
+WAPE: baseline 0.384 | modelo por paciente 0.502
+WAPE por ano  ->  2023: base 0.356 / modelo 0.416 | 2024: base 0.386 / modelo 0.628 | 2025: base 0.408 / modelo 0.469 | 2026: base 0.403 / modelo 0.421
+vies (soma prevista / soma real): baseline 1.002 | modelo 1.140
+
+INTERVALO 80% (cobertura nominal 0.80)
+  baseline + residuo empirico    cobertura=0.787  largura media=4.89
+  modelo + residuo empirico      cobertura=0.775  largura media=5.39
+  modelo, Bernoulli simulado     cobertura=0.790  largura media=4.15
+
+LIMITE INFERIOR UNILATERAL (percentil 20): quanto da pra contar como falta 'segura'
+  baseline + residuo empirico    P(faltas >= limite)=0.920 | limite medio=2.29 faltas/dia (real medio 4.06) | vagas 'seguras' = 56.5% das faltas
+  modelo + residuo empirico      P(faltas >= limite)=0.921 | limite medio=2.41 faltas/dia (real medio 4.06) | vagas 'seguras' = 59.5% das faltas
+  modelo, Bernoulli              P(faltas >= limite)=0.790 | limite medio=3.21 faltas/dia (real medio 4.06) | vagas 'seguras' = 79.0% das faltas
+
+POR CNES (modelo): WAPE base -> modelo
+                faltas_dia  WAPE_base  WAPE_modelo
+cnesexecutante                                    
+2237385              9.758      0.234        0.216
+2693801              7.496      0.341        1.105
+9132562              6.655      0.290        0.284
+2237571              6.590      0.341        0.340
+2237334              6.536      0.326        0.311
+7513151              5.483      0.426        0.472
+2237881              5.313      0.427        0.343
+8006881              4.840      0.354        0.331
+2237601              3.727      0.396        0.461
+7031076              3.252      0.383        0.369
+2237253              3.211      0.442        0.426
+7214448              2.987      0.425        0.400
+6883206              2.854      0.421        0.408
+7031092              2.709      0.425        0.400
+2237849              2.227      0.567        0.536
+2265052              2.016      0.552        0.580
+7092571              1.779      0.567        0.533
+2262355              1.259      0.819        1.604
+2264072              1.011      0.637        1.947
+2262630              0.492      1.165        5.224
+
+tempo total 104s

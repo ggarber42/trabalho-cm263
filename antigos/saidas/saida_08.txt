@@ -1,0 +1,76 @@
+GRUPOS (definidos com 2019-2022):
+                   vol   taxa           quadrante
+cnesexecutante                                   
+2237385         23.209  0.186    volAlto_taxaAlta
+9132562         22.882  0.210    volAlto_taxaAlta
+2262630         19.627  0.240    volAlto_taxaAlta
+2237334         18.454  0.219    volAlto_taxaAlta
+2237571         39.736  0.168   volAlto_taxaBaixa
+7513151         33.334  0.140   volAlto_taxaBaixa
+2237253         32.277  0.152   volAlto_taxaBaixa
+2237881         18.982  0.177   volAlto_taxaBaixa
+2264072         17.326  0.138   volAlto_taxaBaixa
+2262355         15.538  0.151   volAlto_taxaBaixa
+8006881         10.642  0.215   volBaixo_taxaAlta
+2693801          9.407  0.233   volBaixo_taxaAlta
+7031092          7.544  0.364   volBaixo_taxaAlta
+7031076          6.863  0.323   volBaixo_taxaAlta
+7214448          6.523  0.277   volBaixo_taxaAlta
+6883206          6.420  0.350   volBaixo_taxaAlta
+2265052         15.474  0.092  volBaixo_taxaBaixa
+7092571         13.296  0.156  volBaixo_taxaBaixa
+2237849         11.468  0.107  volBaixo_taxaBaixa
+2237601          6.989  0.076  volBaixo_taxaBaixa
+  treinado: global (1 modelo(s) por ano) | 85s
+  treinado: quadrantes (4 modelo(s) por ano) | 134s
+  treinado: volume (2 modelo(s) por ano) | 186s
+  treinado: por_cnes (20 modelo(s) por ano) | 248s
+
+CNES-dias avaliados (comuns a todas as estrategias): 15561 | faltas/dia media 4.06
+
+RESULTADO GERAL (menor = melhor, exceto cobertura: alvo 0.80 e 0.50)
+                   WAPE   vies   CRPS  cob80  larg80  cob50  ECE_P>=k  Brier_P>=k
+baseline_poisson  0.385  1.003  1.096  0.872   4.456  0.676     0.010       0.095
+global            0.372  1.009  1.069  0.850   3.868  0.654     0.018       0.091
+quadrantes        0.376  1.008  1.083  0.845   3.857  0.653     0.019       0.092
+volume            0.379  1.009  1.088  0.848   3.852  0.654     0.019       0.092
+por_cnes          0.392  1.014  1.126  0.836   3.818  0.640     0.023       0.094
+
+WAPE POR CNES
+         faltas_dia  baseline_poisson  global  quadrantes  volume  por_cnes     grupo_quadrante            melhor
+2237385       9.741             0.235   0.222       0.222   0.222     0.226    volAlto_taxaAlta            global
+2693801       7.313             0.344   0.400       0.426   0.465     0.498   volBaixo_taxaAlta  baseline_poisson
+9132562       6.600             0.292   0.278       0.281   0.279     0.286    volAlto_taxaAlta            global
+2237571       6.598             0.341   0.301       0.300   0.301     0.301   volAlto_taxaBaixa        quadrantes
+2237334       6.511             0.325   0.303       0.304   0.304     0.308    volAlto_taxaAlta            global
+7513151       5.752             0.442   0.442       0.443   0.440     0.451   volAlto_taxaBaixa            volume
+2237881       5.280             0.430   0.341       0.348   0.344     0.351   volAlto_taxaBaixa            global
+8006881       4.802             0.357   0.344       0.348   0.345     0.353   volBaixo_taxaAlta            global
+2237601       3.624             0.401   0.406       0.405   0.408     0.423  volBaixo_taxaBaixa  baseline_poisson
+7031076       3.285             0.378   0.368       0.370   0.370     0.378   volBaixo_taxaAlta            global
+2237253       3.271             0.436   0.421       0.425   0.423     0.423   volAlto_taxaBaixa            global
+7214448       2.965             0.425   0.409       0.411   0.413     0.419   volBaixo_taxaAlta            global
+6883206       2.892             0.415   0.396       0.397   0.398     0.402   volBaixo_taxaAlta            global
+7031092       2.755             0.420   0.405       0.406   0.404     0.417   volBaixo_taxaAlta            volume
+2237849       2.256             0.563   0.539       0.544   0.538     0.629  volBaixo_taxaBaixa            volume
+2265052       2.000             0.557   0.534       0.535   0.531     0.541  volBaixo_taxaBaixa            volume
+7092571       1.792             0.562   0.548       0.559   0.556     0.559  volBaixo_taxaBaixa            global
+2262355       1.218             0.826   0.813       0.813   0.802     0.832   volAlto_taxaBaixa            volume
+2264072       1.160             0.593   0.569       0.587   0.582     0.711   volAlto_taxaBaixa            global
+2262630       0.481             1.180   1.169       1.173   1.168     1.177    volAlto_taxaAlta            volume
+
+Quantos CNES cada estrategia vence (WAPE):
+melhor
+global              11
+volume               6
+baseline_poisson     2
+quadrantes           1
+
+CRPS medio por CNES - estrategia vencedora (quantidade):
+melhor_CRPS
+global              10
+volume               5
+baseline_poisson     3
+quadrantes           2
+
+tempo total 256s

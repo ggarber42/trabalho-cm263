@@ -1,0 +1,23 @@
+VALIDACAO (coorte original): regra reproduz 26/26 niveis
+Empty DataFrame
+Columns: [cnes, real, regra, n_quebras, taxa_ult]
+Index: []
+
+NIVEIS NO RECORTE MUNICIPAL
+       cnes  consultas
+nivel                 
+A         6      93631
+B         4     152118
+   cnes nivel                                                  NO_FANTASIA  consultas  n_quebras  taxa_ultimo_regime                           regimes
+8006881     A                       AMBULATORIO DE ESPECIALIDADES MURIALDO      27149          0            0.218572                   19-01>26-03:22%
+2237822     A                  HOSPITAL MATERNO INFANTIL PRESIDENTE VARGAS      21467          0            0.068105                   19-01>26-03: 7%
+7214448     A                  CENTRO DE ESPECIALIDADES ODONTOLOGICAS IAPI      14066          0            0.265392                   19-01>26-03:27%
+7031076     A           CENTRO DE ESPECIALIDADES ODONTOLOGICAS SANTA MARTA      13161          0            0.300281                   19-01>26-03:30%
+6883206     A CENTRO DE ESPECIALIDADES ODONTOLOGICAS VILA DOS COMERCIARIOS      12617          0            0.312277                   19-01>26-03:31%
+7210280     A                                              SAE SANTA MARTA       5171          0            0.224715                   19-01>26-03:22%
+2237385     B                           AMBULATORIO DE ESPECIALIDADES IAPI      56390          1            0.229190 19-01>21-11:17% | 21-12>26-03:23%
+9132562     B          AMBULATORIO DE ESPECIALIDADES VILA DOS COMERCIARIOS      42730          1            0.256025 19-01>22-07:20% | 22-08>26-03:26%
+2237334     B                    AMBULATORIO DE ESPECIALIDADES SANTA MARTA      40796          1            0.241124 19-01>21-01:17% | 21-02>26-03:24%
+7031092     B             CENTRO DE ESPECIALIDADES ODONTOLOGICAS BOM JESUS      12202          1            0.257191 19-01>24-12:37% | 25-01>26-03:26%
+
+salvo: niveis_municipal.csv

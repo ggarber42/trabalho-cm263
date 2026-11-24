@@ -1,0 +1,21 @@
+{
+  "etapa": "S9_avaliacao_municipal_smoke",
+  "gerado_em": "2026-11-24T17:47:43",
+  "python": "3.12.16",
+  "sistema": "Linux-6.8.0-149-generic-x86_64-with-glibc2.35",
+  "entradas": {
+    "/home/guilhermegarber/trabalho-cm263/resultados/municipal_smoke/experimentos.csv": "8577374262fd25c813d0853b206d3cc93d05c4738e936a7e92b8621d29254f91"
+  },
+  "saidas": {
+    "/home/guilhermegarber/trabalho-cm263/resultados/municipal_smoke/experimentos.csv": "8577374262fd25c813d0853b206d3cc93d05c4738e936a7e92b8621d29254f91",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/res_municipal_smoke_linhas_perdidas.csv": "6683d31c5d762f27b89dea39554d746a63257ec322b27999eac093e3fd6f96d6",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/res_municipal_smoke_principal_metricas.csv": "2fcb34f732145e4e6e944455988ad0597a876d158cc8e5c10bb20d74eadb5f78",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/res_municipal_smoke_principal_dm.csv": "094d40f62966f68cc8a1bf5d03380c948e651c8c7f7a26bce8e26a73124b07b7",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/res_municipal_smoke_principal_subgrupos.csv": "a75f5d2ae637e04a24e0b2f77c4770308d81920df69d108a40d4e7bafd3365f2",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/res_municipal_smoke_esquemas_teste_comum.csv": "1c5cf2fa559dbb5d9f28216cc24d22594f3a6f63a077c3d959369e36b6634ffd",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/res_municipal_smoke_defasagens.csv": "b2a8ff9aac4c26c71d71fd2a504e4bbe9957aa42efc5928947f6fa16a716d3de",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/res_municipal_smoke_modos_agenda.csv": "52cd6902cff15f05a90d859d789f850ddba7da2542a2faa51057b16b9acd4ba3",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/res_municipal_smoke_paciente_metricas_consulta.csv": "1794382b2f52d0ca634d6b1581093438a0b993911e75dd7e294730429cec1a28"
+  },
+  "extra": {}
+}

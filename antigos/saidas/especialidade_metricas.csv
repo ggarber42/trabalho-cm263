@@ -1,0 +1,4 @@
+modelo,Brier,logloss,AUC,prev_media,obs_media,AUC_dentro_do_dia
+V1 por paciente (agregado),0.1615,0.4942,0.8315,0.4111,0.4113,0.7883
+base: taxa 28d da especialidade,0.173,0.7464,0.8077,0.3771,0.4113,0.7505
+base: total do dia x fatia da agenda,0.1713,0.5187,0.809,0.4024,0.4113,0.7395

@@ -1,0 +1,16 @@
+{
+  "etapa": "S4_divisoes_municipal_smoke",
+  "gerado_em": "2026-11-24T17:46:44",
+  "python": "3.12.16",
+  "sistema": "Linux-6.8.0-149-generic-x86_64-with-glibc2.35",
+  "entradas": {
+    "/home/guilhermegarber/trabalho-cm263/dados/derivados/amostra_smoke_municipal.parquet": "574d803e16d913495a1f8af54da4ae94afd598394bb665d990761a8b0c7f717f"
+  },
+  "saidas": {
+    "/home/guilhermegarber/trabalho-cm263/tabelas/divisoes_municipal_smoke.csv": "d91128e66bfa012554e855198fa1797474fb0c672ee380832208d4cafff49dab",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/purga_recomendada_municipal_smoke.csv": "d21c99ad66516db1681a18d901dda061111832ffcd6cde31ccdee8f10316aaa8"
+  },
+  "extra": {
+    "smoke": true
+  }
+}

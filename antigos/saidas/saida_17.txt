@@ -1,0 +1,284 @@
+CNES-dias avaliados: 15029 (A 10333 | B 4696) 1s
+painel L: 60200 linhas 2s
+regras ok 2s
+ets ok 4s
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+/home/andrebueno/Google_drive/skill_academico/.venv/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  mlefit = super().fit(
+sarima ok 134s
+glm ok 136s
+hgb ok 144s
+hibrido ok 146s
+
+RESULTADO 2023-2026, modelos que cobrem todo o periodo (alvos: cob80=0.80, cob50=0.50)
+                    WAPE   vies   CRPS  cob80  cob50  larg80    ECE        n
+nivel modelo                                                                
+A     baseline     0.451  1.003  0.879  0.896  0.708   3.665  0.009  10333.0
+      baseline_nb  0.451  1.003  0.877  0.913  0.726   3.994  0.006  10333.0
+      naive7       0.591  0.996  1.212  0.802  0.646   4.573  0.051  10333.0
+      dow4         0.486  1.011  0.968  0.878  0.702   3.989  0.016  10333.0
+      ets          0.445  1.016  0.862  0.915  0.731   3.917  0.003  10333.0
+      sarima       0.444  1.011  0.863  0.913  0.731   3.922  0.003  10333.0
+      glm_nb       0.450  1.024  0.873  0.908  0.723   3.824  0.006  10333.0
+      hgb_poisson  0.442  1.015  0.855  0.913  0.732   3.786  0.003  10333.0
+      V0           0.419  1.005  0.816  0.881  0.703   3.213  0.015  10333.0
+      V1           0.419  1.005  0.818  0.880  0.703   3.210  0.016  10333.0
+B     baseline     0.313  1.002  1.368  0.866  0.645   5.822  0.012   4696.0
+      baseline_nb  0.313  1.002  1.367  0.878  0.662   6.192  0.015   4696.0
+      naive7       0.411  1.004  1.832  0.820  0.597   7.705  0.060   4696.0
+      dow4         0.338  1.002  1.479  0.867  0.636   6.631  0.024   4696.0
+      ets          0.323  1.023  1.409  0.891  0.681   6.704  0.014   4696.0
+      sarima       0.316  1.006  1.413  0.894  0.685   6.829  0.025   4696.0
+      glm_nb       0.353  1.021  1.580  0.870  0.641   6.095  0.013   4696.0
+      hgb_poisson  0.310  0.971  1.353  0.874  0.654   5.873  0.012   4696.0
+      V0           0.315  1.010  1.397  0.819  0.596   4.893  0.020   4696.0
+      V1           0.317  1.007  1.408  0.819  0.606   4.916  0.018   4696.0
+A+B   baseline     0.383  1.002  1.032  0.887  0.688   4.339  0.008  15029.0
+      baseline_nb  0.383  1.002  1.030  0.902  0.706   4.681  0.009  15029.0
+      naive7       0.502  1.000  1.405  0.808  0.631   5.551  0.052  15029.0
+      dow4         0.412  1.007  1.127  0.874  0.681   4.815  0.018  15029.0
+      ets          0.385  1.019  1.033  0.908  0.716   4.788  0.005  15029.0
+      sarima       0.380  1.008  1.035  0.907  0.717   4.830  0.009  15029.0
+      glm_nb       0.402  1.022  1.094  0.896  0.698   4.534  0.005  15029.0
+      hgb_poisson  0.376  0.993  1.010  0.901  0.707   4.438  0.003  15029.0
+      V0           0.367  1.007  0.998  0.862  0.669   3.738  0.015  15029.0
+      V1           0.369  1.006  1.003  0.861  0.673   3.743  0.015  15029.0
+
+RESULTADO 2024+, inclui hibrido e controle (mesmas linhas para todos) (alvos: cob80=0.80, cob50=0.50)
+                    WAPE   vies   CRPS  cob80  cob50  larg80    ECE        n
+nivel modelo                                                                
+A     baseline     0.460  1.000  0.872  0.902  0.712   3.600  0.008   7186.0
+      baseline_nb  0.460  1.000  0.871  0.916  0.733   3.937  0.009   7186.0
+      naive7       0.608  0.996  1.211  0.800  0.643   4.467  0.053   7186.0
+      dow4         0.505  1.011  0.981  0.877  0.698   3.932  0.018   7186.0
+      ets          0.456  1.009  0.859  0.915  0.731   3.826  0.005   7186.0
+      sarima       0.456  1.002  0.860  0.915  0.734   3.835  0.006   7186.0
+      glm_nb       0.463  1.027  0.874  0.913  0.725   3.788  0.005   7186.0
+      hgb_poisson  0.454  1.019  0.854  0.917  0.735   3.744  0.002   7186.0
+      ctrl_glm     0.454  1.017  0.854  0.907  0.728   3.684  0.006   7186.0
+      hib_glm      0.431  1.020  0.811  0.919  0.742   3.647  0.004   7186.0
+      V0           0.430  1.005  0.819  0.881  0.707   3.175  0.015   7186.0
+      V1           0.429  1.006  0.819  0.880  0.709   3.172  0.016   7186.0
+B     baseline     0.327  1.004  1.362  0.867  0.644   5.731  0.013   3294.0
+      baseline_nb  0.327  1.004  1.358  0.881  0.663   6.123  0.016   3294.0
+      naive7       0.426  1.005  1.806  0.822  0.589   7.472  0.062   3294.0
+      dow4         0.352  1.003  1.468  0.863  0.633   6.432  0.026   3294.0
+      ets          0.322  1.016  1.344  0.895  0.683   6.356  0.015   3294.0
+      sarima       0.324  1.000  1.380  0.904  0.695   6.743  0.032   3294.0
+      glm_nb       0.324  0.990  1.347  0.877  0.650   5.922  0.016   3294.0
+      hgb_poisson  0.319  0.993  1.331  0.877  0.663   5.854  0.010   3294.0
+      ctrl_glm     0.323  1.027  1.345  0.873  0.665   5.972  0.008   3294.0
+      hib_glm      0.319  1.035  1.337  0.881  0.669   5.876  0.010   3294.0
+      V0           0.327  1.008  1.386  0.818  0.597   4.895  0.021   3294.0
+      V1           0.323  1.007  1.366  0.825  0.610   4.901  0.019   3294.0
+A+B   baseline     0.395  1.002  1.026  0.891  0.691   4.270  0.008  10480.0
+      baseline_nb  0.395  1.002  1.024  0.905  0.711   4.624  0.011  10480.0
+      naive7       0.519  1.000  1.398  0.807  0.626   5.411  0.053  10480.0
+      dow4         0.429  1.007  1.134  0.873  0.677   4.717  0.020  10480.0
+      ets          0.390  1.012  1.011  0.909  0.716   4.621  0.006  10480.0
+      sarima       0.390  1.001  1.024  0.911  0.722   4.749  0.013  10480.0
+      glm_nb       0.394  1.008  1.023  0.902  0.702   4.459  0.005  10480.0
+      hgb_poisson  0.388  1.006  1.004  0.905  0.712   4.407  0.003  10480.0
+      ctrl_glm     0.389  1.022  1.008  0.896  0.708   4.403  0.004  10480.0
+      hib_glm      0.376  1.028  0.976  0.907  0.719   4.348  0.003  10480.0
+      V0           0.379  1.006  0.997  0.861  0.672   3.716  0.014  10480.0
+      V1           0.377  1.006  0.991  0.863  0.678   3.716  0.014  10480.0
+
+WAPE por CNES (menor = melhor)
+        nivel  baseline  baseline_nb  naive7   dow4    ets  sarima  glm_nb  hgb_poisson  ctrl_glm  hib_glm     V0     V1
+c                                                                                                                       
+2237253     A     0.436        0.436   0.611  0.489  0.428   0.431   0.434        0.432     0.474    0.458  0.421  0.424
+2237334     B     0.325        0.325   0.439  0.342  0.324   0.329   0.320        0.321     0.320    0.299  0.303  0.304
+2237385     B     0.235        0.235   0.318  0.263  0.231   0.230   0.232        0.232     0.233    0.221  0.222  0.222
+2237571     A     0.341        0.341   0.465  0.361  0.340   0.337   0.354        0.347     0.359    0.331  0.301  0.301
+2237601     B     0.401        0.401   0.521  0.445  0.402   0.420   0.431        0.404     0.363    0.352  0.406  0.405
+2237822     A     0.920        0.920   1.055  0.897  0.912   0.866   0.863        0.894     0.860    0.778  0.807  0.809
+2237849     A     0.563        0.563   0.774  0.623  0.597   0.578   0.557        0.543     0.518    0.501  0.539  0.546
+2237881     A     0.430        0.430   0.503  0.462  0.380   0.396   0.389        0.378     0.377    0.333  0.341  0.338
+2262568     A     1.026        1.026   1.074  1.053  1.047   1.091   1.049        1.107     1.162    1.147  1.111  1.113
+2265052     A     0.557        0.557   0.722  0.597  0.577   0.576   0.566        0.552     0.515    0.497  0.534  0.535
+2265060     A     1.131        1.131   1.377  1.144  1.143   1.127   1.094        1.118     1.105    1.102  1.113  1.125
+2693801     B     0.344        0.344   0.437  0.358  0.411   0.363   0.533        0.341     0.386    0.418  0.400  0.411
+6883206     A     0.415        0.415   0.589  0.455  0.415   0.414   0.429        0.414     0.424    0.411  0.396  0.396
+7031076     A     0.378        0.378   0.490  0.410  0.383   0.381   0.395        0.386     0.421    0.415  0.368  0.370
+7031092     B     0.420        0.420   0.542  0.466  0.409   0.409   0.419        0.416     0.454    0.438  0.405  0.406
+7092571     A     0.562        0.562   0.769  0.600  0.550   0.546   0.559        0.545     0.562    0.554  0.548  0.547
+7210280     A     0.888        0.888   1.086  0.917  0.879   0.871   0.896        0.887     0.880    0.867  0.859  0.862
+7214448     A     0.425        0.425   0.593  0.475  0.422   0.417   0.445        0.419     0.487    0.474  0.409  0.408
+8006881     A     0.357        0.357   0.470  0.391  0.352   0.352   0.357        0.353     0.351    0.336  0.344  0.343
+9132562     B     0.292        0.292   0.382  0.311  0.280   0.282   0.289        0.283     0.313    0.300  0.278  0.282
+
+DIEBOLD-MARIANO (ganho > 0 => o modelo e melhor que a referencia; p com HAC por semana)
+     ref      modelo    perda  ganho_medio_por_cnes_dia      p     n
+baseline baseline_nb erro_abs                    0.0000    NaN 15029
+baseline baseline_nb     CRPS                    0.0015 0.3858 15029
+baseline      naive7 erro_abs                   -0.4543 0.0000 15029
+baseline      naive7     CRPS                   -0.3689 0.0000 15029
+baseline        dow4 erro_abs                   -0.1126 0.0000 15029
+baseline        dow4     CRPS                   -0.0935 0.0000 15029
+baseline         ets erro_abs                   -0.0057 0.7119 15029
+baseline         ets     CRPS                    0.0008 0.9391 15029
+baseline      sarima erro_abs                    0.0084 0.3769 15029
+baseline      sarima     CRPS                   -0.0023 0.7537 15029
+baseline      glm_nb erro_abs                   -0.0692 0.0905 15029
+baseline      glm_nb     CRPS                   -0.0575 0.0937 15029
+baseline hgb_poisson erro_abs                    0.0250 0.0014 15029
+baseline hgb_poisson     CRPS                    0.0214 0.0001 15029
+baseline    ctrl_glm erro_abs                    0.0201 0.0108 10480
+baseline    ctrl_glm     CRPS                    0.0183 0.0014 10480
+baseline     hib_glm erro_abs                    0.0723 0.0000 10480
+baseline     hib_glm     CRPS                    0.0506 0.0000 10480
+baseline          V0 erro_abs                    0.0616 0.0000 15029
+baseline          V0     CRPS                    0.0343 0.0008 15029
+baseline          V1 erro_abs                    0.0558 0.0002 15029
+baseline          V1     CRPS                    0.0299 0.0111 15029
+      V1    baseline erro_abs                   -0.0558 0.0002 15029
+      V1    baseline     CRPS                   -0.0299 0.0111 15029
+      V1 baseline_nb erro_abs                   -0.0558 0.0002 15029
+      V1 baseline_nb     CRPS                   -0.0285 0.0160 15029
+      V1      naive7 erro_abs                   -0.5101 0.0000 15029
+      V1      naive7     CRPS                   -0.3989 0.0000 15029
+      V1        dow4 erro_abs                   -0.1684 0.0000 15029
+      V1        dow4     CRPS                   -0.1235 0.0000 15029
+      V1         ets erro_abs                   -0.0615 0.0000 15029
+      V1         ets     CRPS                   -0.0292 0.0027 15029
+      V1      sarima erro_abs                   -0.0474 0.0002 15029
+      V1      sarima     CRPS                   -0.0322 0.0013 15029
+      V1      glm_nb erro_abs                   -0.1250 0.0000 15029
+      V1      glm_nb     CRPS                   -0.0874 0.0009 15029
+      V1 hgb_poisson erro_abs                   -0.0308 0.0268 15029
+      V1 hgb_poisson     CRPS                   -0.0085 0.4613 15029
+      V1    ctrl_glm erro_abs                   -0.0455 0.0004 10480
+      V1    ctrl_glm     CRPS                   -0.0161 0.1285 10480
+      V1     hib_glm erro_abs                    0.0067 0.4205 10480
+      V1     hib_glm     CRPS                    0.0162 0.0332 10480
+      V1          V0 erro_abs                    0.0058 0.3159 15029
+      V1          V0     CRPS                    0.0044 0.3568 15029
+
+tempo total 178s
+exit 0

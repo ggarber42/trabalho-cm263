@@ -1,0 +1,86 @@
+folds: [(2021, 226430, 27265), (2022, 335328, 36332)]
+modelo completo: Brier 0.16222 AUC 0.6926 (0min)
+permutacao ok (1min)
+     tipo                                 nome  d_brier  d_brier_dp    d_auc
+   grupo                              servico  0.01743     0.00020  0.12514
+   grupo                               perfil  0.00465     0.00010  0.03326
+   grupo                               agenda  0.00310     0.00016  0.01966
+   grupo                   historico_paciente  0.00164     0.00013  0.00967
+   grupo                               acesso  0.00102     0.00010  0.00723
+   grupo                           territorio  0.00088     0.00002  0.00521
+   grupo                      administrativas  0.00004     0.00002  0.00016
+variavel                       cnesexecutante  0.00958     0.00022  0.07248
+variavel                     especialidademae  0.00710     0.00016  0.04877
+variavel                                idade  0.00465     0.00010  0.03326
+variavel                    dias_ate_consulta  0.00306     0.00015  0.01945
+variavel                      taxa_falta_prev  0.00099     0.00010  0.00637
+variavel           tempo_desloc_trans_publico  0.00052     0.00007  0.00401
+variavel                             cid_1dig  0.00037     0.00004  0.00264
+variavel                       taxa_alf_geral  0.00028     0.00002  0.00168
+variavel                   distrito_sanitario  0.00023     0.00005  0.00151
+variavel                     n_faltas_previas  0.00016     0.00002  0.00092
+variavel                  n_consultas_previas  0.00014     0.00003  0.00084
+variavel                           dia_semana  0.00013     0.00003  0.00079
+variavel                         corregulador  0.00012     0.00002  0.00062
+variavel                    favela_comunidade  0.00011     0.00003  0.00058
+variavel                        falta_recente  0.00008     0.00003  0.00023
+variavel                   renda_media_winsor  0.00006     0.00002  0.00069
+variavel                possuiunidadeindicada  0.00003     0.00002  0.00012
+variavel                               status  0.00001     0.00000  0.00004
+variavel           distancia_km_trans_publico  0.00001     0.00003  0.00024
+variavel n_consultas_previas_especialidademae  0.00001     0.00000  0.00003
+variavel           ultima_previa_mesmo_motivo  0.00001     0.00000  0.00004
+variavel    n_faltas_previas_especialidademae  0.00000     0.00001  0.00002
+variavel                         primeira_vez  0.00000     0.00000  0.00000
+variavel           n_consultas_previas_motivo  0.00000     0.00000  0.00000
+variavel              n_faltas_previas_motivo  0.00000     0.00000  0.00000
+variavel                           baldiacoes  0.00000     0.00000  0.00000
+variavel                  coordenadoria_saude -0.00000     0.00000 -0.00000
+variavel                            quant_bus -0.00001     0.00001 -0.00002
+variavel                         distancia_km -0.00001     0.00001 -0.00001
+variavel ultima_previa_mesma_especialidademae -0.00002     0.00001 -0.00017
+variavel                     tempo_caminhando -0.00005     0.00001 -0.00020
+variavel                         mes_consulta -0.00006     0.00006 -0.00066
+ablacao por grupo ok (2min)
+              grupo  n_vars  d_brier    ic_lo   ic_hi    d_auc
+           servico       3  0.00780  0.00663 0.00882  0.06147
+            perfil       1  0.00117  0.00080 0.00154  0.00683
+            agenda       3  0.00091  0.00048 0.00135  0.00508
+historico_paciente      11  0.00072  0.00043 0.00104  0.00540
+        territorio       6  0.00026 -0.00003 0.00054  0.00187
+   administrativas       2 -0.00010 -0.00031 0.00013 -0.00026
+            acesso       6 -0.00010 -0.00036 0.00012 -0.00023
+rodada 1 (32 vars): menor delta = mes_consulta -0.000210 IC[-0.000493, 0.000040] -> REMOVE (7min)
+rodada 2 (31 vars): menor delta = ultima_previa_mesma_especialidademae -0.000302 IC[-0.000476, -0.000126] -> REMOVE (11min)
+rodada 3 (30 vars): menor delta = n_faltas_previas_especialidademae -0.000013 IC[-0.000127, 0.000100] -> REMOVE (14min)
+rodada 4 (29 vars): menor delta = primeira_vez 0.000000 IC[0.000000, 0.000000] -> REMOVE (18min)
+rodada 5 (28 vars): menor delta = quant_bus 0.000000 IC[0.000000, 0.000000] -> REMOVE (21min)
+rodada 6 (27 vars): menor delta = status 0.000000 IC[0.000000, 0.000000] -> REMOVE (24min)
+rodada 7 (26 vars): menor delta = n_consultas_previas_motivo 0.000005 IC[-0.000090, 0.000097] -> REMOVE (26min)
+rodada 8 (25 vars): menor delta = possuiunidadeindicada -0.000052 IC[-0.000296, 0.000175] -> REMOVE (29min)
+rodada 9 (24 vars): menor delta = n_faltas_previas_motivo 0.000000 IC[0.000000, 0.000000] -> REMOVE (31min)
+rodada 10 (23 vars): menor delta = coordenadoria_saude 0.000059 IC[-0.000011, 0.000134] -> REMOVE (34min)
+rodada 11 (22 vars): menor delta = n_consultas_previas_especialidademae 0.000061 IC[-0.000114, 0.000239] -> REMOVE (36min)
+rodada 12 (21 vars): menor delta = distancia_km -0.000084 IC[-0.000280, 0.000109] -> REMOVE (38min)
+rodada 13 (20 vars): menor delta = tempo_caminhando 0.000046 IC[-0.000110, 0.000226] -> REMOVE (39min)
+rodada 14 (19 vars): menor delta = renda_media_winsor 0.000057 IC[-0.000155, 0.000256] -> REMOVE (41min)
+rodada 15 (18 vars): menor delta = ultima_previa_mesmo_motivo -0.000044 IC[-0.000178, 0.000097] -> REMOVE (43min)
+rodada 16 (17 vars): menor delta = n_consultas_previas 0.000073 IC[-0.000102, 0.000260] -> REMOVE (44min)
+rodada 17 (16 vars): menor delta = tempo_desloc_trans_publico -0.000070 IC[-0.000269, 0.000126] -> REMOVE (45min)
+rodada 18 (15 vars): menor delta = favela_comunidade -0.000054 IC[-0.000247, 0.000137] -> REMOVE (46min)
+rodada 19 (14 vars): menor delta = baldiacoes 0.000154 IC[-0.000043, 0.000343] -> REMOVE (47min)
+rodada 20 (13 vars): menor delta = dia_semana -0.000063 IC[-0.000256, 0.000131] -> REMOVE (48min)
+rodada 21 (12 vars): menor delta = falta_recente 0.000020 IC[-0.000156, 0.000190] -> REMOVE (49min)
+rodada 22 (11 vars): menor delta = distrito_sanitario 0.000046 IC[-0.000179, 0.000261] -> REMOVE (50min)
+rodada 23 (10 vars): menor delta = cid_1dig 0.000137 IC[-0.000123, 0.000373] -> REMOVE (51min)
+rodada 24 (9 vars): menor delta = n_faltas_previas 0.000178 IC[-0.000029, 0.000377] -> REMOVE (51min)
+rodada 25 (8 vars): menor delta = corregulador -0.000010 IC[-0.000194, 0.000187] -> REMOVE (51min)
+rodada 26 (7 vars): menor delta = taxa_alf_geral 0.000270 IC[-0.000029, 0.000513] -> REMOVE (52min)
+rodada 27 (6 vars): menor delta = taxa_falta_prev 0.000833 IC[0.000594, 0.001103] -> para (52min)
+FINAL: 6 variaveis; removidas 26: ['mes_consulta', 'ultima_previa_mesma_especialidademae', 'n_faltas_previas_especialidademae', 'primeira_vez', 'quant_bus', 'status', 'n_consultas_previas_motivo', 'possuiunidadeindicada', 'n_faltas_previas_motivo', 'coordenadoria_saude', 'n_consultas_previas_especialidademae', 'distancia_km', 'tempo_caminhando', 'renda_media_winsor', 'ultima_previa_mesmo_motivo', 'n_consultas_previas', 'tempo_desloc_trans_publico', 'favela_comunidade', 'baldiacoes', 'dia_semana', 'falta_recente', 'distrito_sanitario', 'cid_1dig', 'n_faltas_previas', 'corregulador', 'taxa_alf_geral']
+                   conjunto   brier     auc  ganho_vs_final    ic_lo    ic_hi
+                      final 0.16243 0.69169         0.00000  0.00000  0.00000
+             +taxa_cnes_28d 0.16260 0.68902        -0.00017 -0.00055  0.00016
+            +taxa_prev_suav 0.16236 0.69196         0.00006 -0.00015  0.00025
+troca cnes -> taxa_cnes_28d 0.16316 0.68524        -0.00074 -0.00130 -0.00021
+relatorio salvo (52min)

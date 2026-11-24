@@ -1,0 +1,42 @@
+variavel;grupo;momento_disponivel;risco_pos_desfecho;fonte_ou_observacao
+idsolicitacao;identificacao;solicitacao;nao;Identificador da solicitacao. Nao usar como variavel.
+idpaciente;identificacao;solicitacao;nao;Identificador pessoal. Nunca imprimir nem salvar em saida.
+data_solicitacao;tempo;solicitacao;nao;Data em que o encaminhamento foi solicitado.
+datahora_consulta;tempo;agendamento (t0);a_confirmar;Data da consulta agendada. Se a consulta foi remarcada depois de t0 a data final pode ser posterior a informacao de t0 (confirmar com o servico).
+rid;identificacao;construida;nao;Numero da linha criado no reestruturacao.qmd. Nao usar como variavel.
+t0;tempo;agendamento (t0);nao;t0 = data_solicitacao + max(diasfilaespera, 0). Data de corte do historico do paciente.
+situacaoagenda;desfecho;apos a data da consulta;desfecho;Desfecho. y = (situacaoagenda == FALTANTE). Categorias restantes: REALIZADA e FALTANTE (as demais foram filtradas no qmd).
+corregulador;encaminhamento;solicitacao;nao;Conferir no servico se pode mudar depois da solicitacao.
+especialidademae;encaminhamento;solicitacao;nao;Especialidade solicitada.
+cid_3dig;encaminhamento;solicitacao;nao;CID com 3 digitos informado na solicitacao.
+cid_1dig;encaminhamento;solicitacao;nao;Capitulo do CID (1 digito).
+possuiunidadeindicada;encaminhamento;a_confirmar;suspeita;Indica se a solicitacao trazia unidade executante indicada. Se for preenchida apos a regulacao ou o agendamento pode carregar informacao posterior. Confirmar com o servico.
+dias_ate_consulta;tempo;agendamento (t0);nao;datahora_consulta - data_solicitacao (inclui a espera). Conhecida quando a consulta e agendada.
+dia_semana;calendario;agendamento (t0);nao;Calculada da data da consulta.
+mes_consulta;calendario;agendamento (t0);nao;Calculada da data da consulta.
+idade;paciente;solicitacao;a_confirmar;Confirmar se e a idade na solicitacao ou na consulta (diferenca pequena).
+n_consultas_previas;historico;t0;nao;Contagem de consultas do paciente com data_ev < t0 (regra do qmd). Conferida pela auditoria.
+n_faltas_previas;historico;t0;nao;Idem, so as faltantes.
+falta_recente;historico;t0;nao;Categoria de tempo desde a ultima falta anterior a t0.
+primeira_vez;historico;t0;nao;1 se n_consultas_previas == 0.
+n_consultas_previas_especialidademae;historico;t0;nao;Historico na mesma especialidade.
+n_faltas_previas_especialidademae;historico;t0;nao;Idem.
+ultima_previa_mesma_especialidademae;historico;t0;nao;Desfecho da ultima consulta previa na mesma especialidade.
+n_consultas_previas_motivo;historico;t0;nao;Historico no mesmo motivo (especialidade + CID3).
+n_faltas_previas_motivo;historico;t0;nao;Idem.
+ultima_previa_mesmo_motivo;historico;t0;nao;Desfecho da ultima consulta previa no mesmo motivo.
+cnes_solicitante;unidade;solicitacao;nao;CNES da unidade solicitante.
+cnesexecutante;unidade;agendamento (t0);nao;CNES onde a consulta ocorre.
+favela_comunidade;territorio;estatica (censo);nao;Variavel de setor censitario, fixa no tempo.
+taxa_alf_geral;territorio;estatica (censo);nao;Idem.
+renda_media_winsor;territorio;estatica (censo);nao;Idem.
+coordenadoria_saude;territorio;estatica;nao;Territorio da unidade.
+distrito_sanitario;territorio;estatica;nao;Territorio da unidade.
+status;acesso;estatica (calculo de rota);suspeita_baixa;Status do calculo de distancia (ok/sem_rota/mesmo_local, NaN coincide com as 7 variaveis de distancia). Pelo padrao de ausencia nao descreve o desfecho. Definicao exata depende do script das distancias (ausente).
+distancia_km;acesso;estatica (calculo de rota);nao;Calculada entre unidades, script gerador ausente.
+tempo_caminhando;acesso;estatica (calculo de rota);nao;Idem.
+distancia_km_trans_publico;acesso;estatica (calculo de rota);nao;Idem.
+tempo_desloc_trans_publico;acesso;estatica (calculo de rota);nao;Idem.
+quant_bus;acesso;estatica (calculo de rota);nao;Idem.
+baldiacoes;acesso;estatica (calculo de rota);nao;Idem.
+DS_NATUREZA_JUR;unidade;estatica (cadastro CNES);nao;Natureza juridica do estabelecimento, usada para o recorte municipal. 4.491 ausentes.

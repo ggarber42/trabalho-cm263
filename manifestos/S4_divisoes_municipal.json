@@ -1,0 +1,16 @@
+{
+  "etapa": "S4_divisoes_municipal",
+  "gerado_em": "2026-11-16T22:58:50",
+  "python": "3.12.3",
+  "sistema": "Linux-6.17.0-35-generic-x86_64-with-glibc2.39",
+  "entradas": {
+    "/home/andrebueno/Google_drive/01_Doutorado/Tese/banco/serie_temporal/gercon_poa_censo_distancias_com_natureza_juridica.parquet": "8e78fa959fc7406a1bfb1e888b441e81a0f95fd0fa9d17b78101d50162a617c6"
+  },
+  "saidas": {
+    "/home/andrebueno/Google_drive/01_Doutorado/Tese/banco/serie_temporal/tabelas/divisoes_municipal.csv": "5b34444325ed839a11acbb967b4862504fee9216108a6830f3b3c4d6f043ed99",
+    "/home/andrebueno/Google_drive/01_Doutorado/Tese/banco/serie_temporal/tabelas/purga_recomendada_municipal.csv": "e2cb41a9b7e837e516c888bccee933f41c6d681812eb40eb9825965f6eda636f"
+  },
+  "extra": {
+    "smoke": false
+  }
+}

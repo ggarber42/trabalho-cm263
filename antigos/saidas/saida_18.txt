@@ -1,0 +1,49 @@
+/home/andrebueno/Google_drive/01_Doutorado/Tese/banco/serie_temporal/18_especialidade.py:128: UserWarning: obj.round has no effect with datetime, timedelta, or period dtypes. Use obj.dt.round(...) instead.
+  out.round(4).to_csv("previsao_especialidade.csv", index=False)
+CNES-dias: 15029 | k mediano 0.987
+celulas CNES-dia-especialidade: 74062 | com falta: 41.1%
+
+METRICAS POR CELULA (menor Brier/logloss e maior AUC = melhor)
+                              modelo  Brier  logloss    AUC  prev_media  obs_media  AUC_dentro_do_dia
+          V1 por paciente (agregado) 0.1615   0.4942 0.8315      0.4111     0.4113             0.7883
+     base: taxa 28d da especialidade 0.1730   0.7464 0.8077      0.3771     0.4113             0.7505
+base: total do dia x fatia da agenda 0.1713   0.5187 0.8090      0.4024     0.4113             0.7395
+
+RANKING DE ESPECIALIDADES NOS CNES-DIAS COM FALTA (hit@1 = a 1a do ranking teve falta; recall@3 = % das faltas nas 3 primeiras)
+                           ordenacao  hit@1  recall@3  cnes_dias_com_falta
+          V1 por paciente (agregado)  0.862     0.850                12126
+     base: taxa 28d da especialidade  0.843     0.835                12126
+base: total do dia x fatia da agenda  0.828     0.827                12126
+            referencia: maior agenda  0.828     0.827                12126
+
+CALIBRACAO de P(>=1 falta na especialidade no CNES-dia), V1
+        faixa     n  prev_media  observado
+(-0.001, 0.1] 11007       0.063      0.077
+   (0.1, 0.2] 13857       0.146      0.159
+   (0.2, 0.3]  9694       0.248      0.258
+   (0.3, 0.4]  7437       0.348      0.353
+   (0.4, 0.5]  5971       0.448      0.452
+   (0.5, 0.6]  5158       0.549      0.543
+   (0.6, 0.7]  4768       0.649      0.642
+   (0.7, 0.8]  4400       0.749      0.723
+   (0.8, 0.9]  4497       0.851      0.819
+   (0.9, 1.0]  7273       0.962      0.942
+
+POR ESPECIALIDADE (15 com mais faltas; vies = previsto/observado)
+                           celulas  faltas  vies_V1  vies_base  WAPE_V1  WAPE_base
+especialidademae                                                                  
+OFTALMOLOGIA                  3629    8170    1.104      1.020    0.521      0.540
+GINECOLOGIA                   5199    6363    1.008      0.998    0.589      0.615
+ODONTO ENDODONTIA             2886    5627    0.981      1.002    0.466      0.496
+NUTRICAO                      2557    4356    0.985      1.002    0.488      0.500
+CARDIOLOGIA                   3950    3129    1.046      1.018    0.773      0.774
+PEDIATRIA                     2992    2828    1.047      0.991    0.711      0.714
+DERMATOLOGIA                  2469    2659    1.090      1.004    0.686      0.677
+CIRURGIA BUCOMAXILOFACIAL     3145    2243    1.074      0.995    0.831      0.830
+ORTOPEDIA                     2448    1583    0.997      0.988    0.773      0.790
+OCI - OFTALMOLOGIA             421    1565    0.819      0.952    0.484      0.424
+OBSTETRICIA                   3403    1397    1.131      0.978    1.150      1.104
+ODONTO PERIODONTIA            1630    1387    0.993      1.009    0.734      0.808
+OTORRINOLARINGOLOGIA          1631    1245    0.889      0.973    0.736      0.753
+NEUROLOGIA                    2495    1229    0.916      1.012    0.950      0.953
+UROLOGIA                      2164    1206    1.117      1.012    0.920      0.910

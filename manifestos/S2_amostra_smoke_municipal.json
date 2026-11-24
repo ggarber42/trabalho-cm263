@@ -1,0 +1,14 @@
+{
+  "etapa": "S2_amostra_smoke_municipal",
+  "gerado_em": "2026-11-24T17:46:39",
+  "python": "3.12.16",
+  "sistema": "Linux-6.8.0-149-generic-x86_64-with-glibc2.35",
+  "entradas": {
+    "/home/guilhermegarber/trabalho-cm263/gercon_poa_censo_distancias_com_natureza_juridica.parquet": "8e78fa959fc7406a1bfb1e888b441e81a0f95fd0fa9d17b78101d50162a617c6"
+  },
+  "saidas": {
+    "/home/guilhermegarber/trabalho-cm263/dados/derivados/amostra_smoke_municipal.parquet": "574d803e16d913495a1f8af54da4ae94afd598394bb665d990761a8b0c7f717f",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/amostra_smoke_municipal.csv": "5d067d4266e134ab0c306aba0bf2c1ac35f51386dcf9fb4145dfdc520aff7bef"
+  },
+  "extra": {}
+}

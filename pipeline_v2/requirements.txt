@@ -1,0 +1,9 @@
+# Versões exatas usadas no teste de 22/11/2026 (Python 3.12.3)
+pandas==3.0.5
+numpy==2.5.1
+pyarrow==24.0.0
+scipy==1.18.0
+statsmodels==0.15.0
+scikit-learn==1.9.0
+PyYAML==6.0.3
+pytest==9.1.1

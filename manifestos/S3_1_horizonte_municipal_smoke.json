@@ -1,0 +1,17 @@
+{
+  "etapa": "S3_1_horizonte_municipal_smoke",
+  "gerado_em": "2026-11-24T17:46:45",
+  "python": "3.12.16",
+  "sistema": "Linux-6.8.0-149-generic-x86_64-with-glibc2.35",
+  "entradas": {
+    "/home/guilhermegarber/trabalho-cm263/dados/derivados/amostra_smoke_municipal.parquet": "574d803e16d913495a1f8af54da4ae94afd598394bb665d990761a8b0c7f717f"
+  },
+  "saidas": {
+    "/home/guilhermegarber/trabalho-cm263/tabelas/antecedencia_agendamento_municipal_smoke.csv": "00520b0b547b37b10e3735f75a0d2761446bf78e928b484ab21feb1f29393dde",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/agenda_conhecida_por_h_municipal_smoke.csv": "ae475785d86de4c984b86d9a69c6df80ecc5c69529b6e8d033744cd769fa7c86",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/acf_taxa_diaria_municipal_smoke.csv": "c257c5d5af06faf4273cb207a77f43221121f0807256546bdce5dec6841c2a08",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/atraso_registro_smoke.csv": "40aeb48cf9896b9b4227ab37dbf7367594b2b9ce982a773b633dafd9cfee93ba",
+    "/home/guilhermegarber/trabalho-cm263/entregaveis/justificativa_horizonte_smoke.md": "281937590de27060f43abaea5cb517ddf3abbf59deb01cd78f8a05a052737aa0"
+  },
+  "extra": {}
+}

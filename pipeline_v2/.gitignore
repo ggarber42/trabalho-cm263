@@ -1,0 +1,4 @@
+dados/brutos/
+saidas/
+__pycache__/
+.pytest_cache/

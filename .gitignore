@@ -1,0 +1,72 @@
+# .gitignore — trabalho CMP263 (absenteísmo GERCON Porto Alegre)
+# Regra geral: código, configuração, listas de CNES, tabelas agregadas e textos vão para o git;
+# dados por consulta/paciente (LGPD), artefatos grandes e ambientes NÃO vão.
+
+# ---------------- Dados (LGPD e tamanho) ----------------
+# Qualquer parquet pode ter linhas por consulta/paciente: base bruta, amostra do smoke,
+# painéis e previsões por consulta. A base de entrada é descrita no README.md (nome + SHA-256).
+*.parquet
+*.feather
+*.arrow
+dados/brutos/
+dados/distancias/
+pipeline_v2/dados/brutos/
+# Cadastro CNES (DATASUS) baixado à parte; ver pipeline_v2/README.md
+tbEstabelecimento*.csv
+tbNaturezaJuridica*.csv
+BASE_DE_DADOS_CNES_*.ZIP
+# Pacotes compactados (ex.: pcad-resultados.zip, cópia de resultados/ com parquets dentro)
+*.zip
+*.ZIP
+__MACOSX/
+
+# ---------------- Saídas regeneráveis do pipeline ----------------
+# Previsões, tuning e metadados por experimento (refeitos por `make smoke` / `make full`)
+# e logs de execução. As tabelas e figuras finais ficam em tabelas/ e figuras/.
+resultados/
+logs/
+tabelas/
+figuras/
+
+# ---------------- Modelos serializados e objetos Python ----------------
+*.pkl
+*.pickle
+*.joblib
+
+# ---------------- Ambientes e caches ----------------
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+.mypy_cache/
+.ruff_cache/
+
+# ---------------- R / Quarto ----------------
+.Rhistory
+.RData
+.Rproj.user/
+*_files/
+.quarto/
+
+# ---------------- Segredos e configurações locais ----------------
+.env
+.Renviron
+*.key
+.claude/settings.local.json
+pipeline_v2/config_local.yaml
+
+# ---------------- Sistema / editor ----------------
+.DS_Store
+Thumbs.db
+desktop.ini
+*.gdlink
+*~
+.vscode/
+.idea/
+
+# ---------------- Material de terceiros ----------------
+# Artigo usado como referência (direitos do editor)
+bmj-2023-078378.full.pdf

@@ -1,0 +1,23 @@
+{
+  "etapa": "S1_auditoria",
+  "gerado_em": "2026-11-16T22:49:47",
+  "python": "3.12.3",
+  "sistema": "Linux-6.17.0-35-generic-x86_64-with-glibc2.39",
+  "entradas": {
+    "/home/andrebueno/Google_drive/01_Doutorado/Tese/banco/serie_temporal/gercon_poa_censo_distancias_com_natureza_juridica.parquet": "8e78fa959fc7406a1bfb1e888b441e81a0f95fd0fa9d17b78101d50162a617c6",
+    "/home/andrebueno/Google_drive/01_Doutorado/Tese/banco/serie_temporal/flag_municipal.csv": "026074fdab73e3333e3d88211f747670e4cc2fe41a8fc0c5b1383b673323bea5",
+    "/home/andrebueno/Google_drive/01_Doutorado/Tese/banco/serie_temporal/niveis_municipal.csv": "ff7f0da1de83f9053fb638e2b4eed404754f087e6de73a579b65cfb2ceeb5ad7",
+    "/home/andrebueno/Google_drive/01_Doutorado/Tese/banco/serie_temporal/dados/dicionario_manual.csv": "ae569ea439e59cae2991bd7d42374bd3161d70c3c6129c7d6c0f0368eec2465f"
+  },
+  "saidas": {
+    "/home/andrebueno/Google_drive/01_Doutorado/Tese/banco/serie_temporal/tabelas/auditoria_dados.csv": "9c641b38dac362eb72bda33a5196eb2ce7c3b7759f0307e4e67aa1d1b47ea728",
+    "/home/andrebueno/Google_drive/01_Doutorado/Tese/banco/serie_temporal/tabelas/ausentes_por_variavel_ano.csv": "fe21635e4ef8d80c401e922d698bb82f685bce8f2b136cd248e6945a3c6e05a3",
+    "/home/andrebueno/Google_drive/01_Doutorado/Tese/banco/serie_temporal/tabelas/atividade_cnes.csv": "3dab2648a1203e726acade1da45f17d0b4e6808583a0006b14b0fef30c5c6fd7",
+    "/home/andrebueno/Google_drive/01_Doutorado/Tese/banco/serie_temporal/tabelas/fluxograma_selecao.csv": "5ec7162c127fa6911082cfe0fcb77ea73aa9227fe25bb6263c63789d35da31cc",
+    "/home/andrebueno/Google_drive/01_Doutorado/Tese/banco/serie_temporal/dicionario_variaveis.md": "af21be9390eac1020a83d2b99019781c36451b1a11d6b25a720192671e400566"
+  },
+  "extra": {
+    "smoke": false,
+    "variaveis_sem_entrada_no_dicionario": []
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "etapa": "S1_auditoria_smoke",
+  "gerado_em": "2026-11-24T17:46:37",
+  "python": "3.12.16",
+  "sistema": "Linux-6.8.0-149-generic-x86_64-with-glibc2.35",
+  "entradas": {
+    "/home/guilhermegarber/trabalho-cm263/gercon_poa_censo_distancias_com_natureza_juridica.parquet": "8e78fa959fc7406a1bfb1e888b441e81a0f95fd0fa9d17b78101d50162a617c6",
+    "/home/guilhermegarber/trabalho-cm263/flag_municipal.csv": "026074fdab73e3333e3d88211f747670e4cc2fe41a8fc0c5b1383b673323bea5",
+    "/home/guilhermegarber/trabalho-cm263/niveis_municipal.csv": "ff7f0da1de83f9053fb638e2b4eed404754f087e6de73a579b65cfb2ceeb5ad7",
+    "/home/guilhermegarber/trabalho-cm263/dados/dicionario_manual.csv": "ae569ea439e59cae2991bd7d42374bd3161d70c3c6129c7d6c0f0368eec2465f"
+  },
+  "saidas": {
+    "/home/guilhermegarber/trabalho-cm263/tabelas/auditoria_dados_smoke.csv": "eac7d6af3d16b30023100aaa58d1f9df7a43372a7769dff6dd75c9769df81a2d",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/ausentes_por_variavel_ano_smoke.csv": "3a99ff15a401bdb8e54e73b207d267c10c3cea42d5b2f2f732ad76b802a8ffdb",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/atividade_cnes_smoke.csv": "9b78720470ddfe0d29f990a854699c96bbb346fc0b3b7fecdb4d4c4d63ae7a4e",
+    "/home/guilhermegarber/trabalho-cm263/tabelas/fluxograma_selecao_smoke.csv": "d23d1842dc7884c4a6710a865f60373f040e1c6f670ab88cb6019f7fae63257c",
+    "/home/guilhermegarber/trabalho-cm263/dicionario_variaveis_smoke.md": "404fef6c9ff7898ecb785130dbb6804e30563054bf172e1ca6ec84c057635f23"
+  },
+  "extra": {
+    "smoke": true,
+    "variaveis_sem_entrada_no_dicionario": []
+  }
+}

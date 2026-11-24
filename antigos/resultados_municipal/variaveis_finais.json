@@ -1,0 +1,43 @@
+{
+ "variaveis": [
+  "idade",
+  "taxa_falta_prev",
+  "dias_ate_consulta",
+  "distancia_km_trans_publico",
+  "especialidademae",
+  "cnesexecutante"
+ ],
+ "removidas": [
+  "mes_consulta",
+  "ultima_previa_mesma_especialidademae",
+  "n_faltas_previas_especialidademae",
+  "primeira_vez",
+  "quant_bus",
+  "status",
+  "n_consultas_previas_motivo",
+  "possuiunidadeindicada",
+  "n_faltas_previas_motivo",
+  "coordenadoria_saude",
+  "n_consultas_previas_especialidademae",
+  "distancia_km",
+  "tempo_caminhando",
+  "renda_media_winsor",
+  "ultima_previa_mesmo_motivo",
+  "n_consultas_previas",
+  "tempo_desloc_trans_publico",
+  "favela_comunidade",
+  "baldiacoes",
+  "dia_semana",
+  "falta_recente",
+  "distrito_sanitario",
+  "cid_1dig",
+  "n_faltas_previas",
+  "corregulador",
+  "taxa_alf_geral"
+ ],
+ "candidata_adotada": null,
+ "brier_cv_completo": 0.16222327492698368,
+ "brier_cv_final": 0.16242568177008027,
+ "auc_cv_completo": 0.6925659529822769,
+ "auc_cv_final": 0.6916894216101734
+}
