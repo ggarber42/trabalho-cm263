@@ -10,7 +10,7 @@ O pipeline (`src/`, `etapas/`, `Makefile`) lê a base indicada em `config.yaml` 
 
 | Arquivo | Conteúdo | SHA-256 |
 |---|---|---|
-| `gercon_poa_censo_distancias_com_natureza_juridica.parquet` | Uma linha por consulta agendada no GERCON (Porto Alegre, 2018–2026), com histórico do paciente, distâncias e natureza jurídica da CNES executante | `8e78fa959fc7406a1bfb1e888b441e81a0f95fd0fa9d17b78101d50162a617c6` |
+| `gercon_poa_censo_distancias_com_natureza_juridica.parquet` | Uma linha por consulta agendada no GERCON (Porto Alegre, 2018–2026) | `8e78fa959fc7406a1bfb1e888b441e81a0f95fd0fa9d17b78101d50162a617c6` |
 | `gercon_poa_censo_estabelecimentos.parquet` | Cadastro auxiliar das CNES | `0f3a1333877ffcf5d781615adbf95b1415146ade7bdad2b8c492924f6e489a95` |
 
 - **Os parquets não estão no git** (dados por consulta/paciente, LGPD, e tamanho ~42 MB). Coloque-os na raiz

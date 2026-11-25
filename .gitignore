@@ -5,7 +5,7 @@
 # ---------------- Dados (LGPD e tamanho) ----------------
 # Qualquer parquet pode ter linhas por consulta/paciente: base bruta, amostra do smoke,
 # painéis e previsões por consulta. A base de entrada é descrita no README.md (nome + SHA-256).
-*.parquet
+.parquet
 *.feather
 *.arrow
 dados/brutos/
